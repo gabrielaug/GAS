@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Familia {
     
-    private int nr_Registro;
+    private int nr_Familia;
     private String endereco;
     private String complemento;
     private String numero;
@@ -26,12 +26,12 @@ public class Familia {
     private Date dt_Cadastro;
     private ArrayList<Morador> Morador =  new ArrayList<>();
 
-    public int getNr_Registro() {
-        return nr_Registro;
+    public int getNr_Familia() {
+        return nr_Familia;
     }
 
-    public void setNr_Registro(int nr_Registro) {
-        this.nr_Registro = nr_Registro;
+    public void setNr_Familia(int nr_Registro) {
+        this.nr_Familia = nr_Registro;
     }
 
     public String getEndereco() {

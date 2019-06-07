@@ -26,6 +26,15 @@ public class Morador {
     private String deficiente;
     private String observacao;
     private Date dt_Cadastro;
+    private Familia familia;
+
+    public Familia getFamilia() {
+        return familia;
+    }
+
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
+    }
 
     public int getCod_Morador() {
         return cod_Morador;

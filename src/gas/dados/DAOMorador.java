@@ -26,7 +26,7 @@ public class DAOMorador implements InterfaceMorador{
         
         Connection con = Conexao.getInstance().getConnection();
         
-        String sql = "INSERT INTO Morador (Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Morador (Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Nr_Familia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -41,6 +41,7 @@ public class DAOMorador implements InterfaceMorador{
         pstm.setDouble(9,morador.getRenda());
         pstm.setString(10,morador.getDeficiente());
         pstm.setString(11,morador.getObservacao());
+        pstm.setInt(12, morador.getFamilia().getNr_Familia());
         
         try{
          
@@ -63,7 +64,7 @@ public class DAOMorador implements InterfaceMorador{
         Connection con = Conexao.getInstance().getConnection();
         
         String sql = "UPDATE Morador Nome = ?,CPF = ? ,RG = ?,ORG_Emissor = ?,UF_Emissor = ?,Profissao = ?,Telefone = ?,Celular = ?,Renda = ?,";
-                sql +="Deficiente = ?,Observacao = ? WHERE ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                sql +="Deficiente = ?,Observacao = ? WHERE Cod_Morador = ?";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -124,7 +125,7 @@ public class DAOMorador implements InterfaceMorador{
     }
 
     @Override
-    public ArrayList<Morador> listarMorador() throws DAOException, SQLException {
+    public ArrayList<Morador> listarMorador(Morador morador) throws DAOException, SQLException {
        
         
         ArrayList<Morador> lista = new ArrayList<>();
@@ -132,17 +133,33 @@ public class DAOMorador implements InterfaceMorador{
 
            Connection con = Conexao.getInstance().getConnection();
 
-           String sql = "SELECT Morador (Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao FROM Morador WHERE ";
+           String sql = "SELECT Morador (Cod_Morador,Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Nr_Familia FROM Morador WHERE Nr_Familia = ?";
 
            PreparedStatement pstm;
            pstm = con.prepareStatement(sql);
+           pstm.setInt(1,morador.getFamilia().getNr_Familia());
            ResultSet rs = null;
 
            try{
            rs = pstm.executeQuery();
 
            while(rs.next()){
-               Morador morador = new Morador();
+               Morador reMorador = new Morador();
+               
+               reMorador.setCod_Morador(rs.getInt("Cod_Morador"));
+               reMorador.setNome(rs.getString("Nome"));
+               reMorador.setCpf(rs.getString("CPF"));
+               reMorador.setRg(rs.getString("RG"));
+               reMorador.setOrg_Emissor(rs.getString("ORG_Emissor"));
+               reMorador.setUfEmissor(rs.getString("UF_Emissor"));
+               reMorador.setProfissao(rs.getString("Profissao"));
+               reMorador.setTelefone(rs.getString("Telefone"));
+               reMorador.setCelular(rs.getString("Celular"));
+               reMorador.setRenda(rs.getDouble("Renda"));
+               reMorador.setDeficiente(rs.getString("Deficiente"));
+               reMorador.setObservacao(rs.getString("Observacao"));
+               reMorador.getFamilia().setNr_Familia(rs.getInt("Nr_Familia"));
+               lista.add(morador);
                
            }
            }
@@ -158,7 +175,48 @@ public class DAOMorador implements InterfaceMorador{
 
     @Override
     public Morador pesquisar(Morador morador) throws DAOException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Morador retorno =  new Morador();
+        
+        
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "SELECT Morador (Cod_Morador,Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Nr_Familia FROM Morador WHERE Cod_Morador= ?";
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setInt(1, morador.getCod_Morador());
+        ResultSet rs = null;
+        
+        try{
+        rs = pstm.executeQuery();
+        
+        if(rs.next()){
+               retorno.setCod_Morador(rs.getInt("Cod_Morador"));
+               retorno.setNome(rs.getString("Nome"));
+               retorno.setCpf(rs.getString("CPF"));
+               retorno.setRg(rs.getString("RG"));
+               retorno.setOrg_Emissor(rs.getString("ORG_Emissor"));
+               retorno.setUfEmissor(rs.getString("UF_Emissor"));
+               retorno.setProfissao(rs.getString("Profissao"));
+               retorno.setTelefone(rs.getString("Telefone"));
+               retorno.setCelular(rs.getString("Celular"));
+               retorno.setRenda(rs.getDouble("Renda"));
+               retorno.setDeficiente(rs.getString("Deficiente"));
+               retorno.setObservacao(rs.getString("Observacao"));
+               retorno.getFamilia().setNr_Familia(rs.getInt("Nr_Familia"));
+            
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+            Conexao.closeConnection(con, pstm, rs);
+        }
+        return retorno;
+        
+        
     }
     
 }
