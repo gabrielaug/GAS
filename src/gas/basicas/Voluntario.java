@@ -31,6 +31,15 @@ public class Voluntario{
     private String status;
     private String dt_Cadastro;
 
+    public int getStatusSenha() {
+        return statusSenha;
+    }
+
+    public void setStatusSenha(int statusSenha) {
+        this.statusSenha = statusSenha;
+    }
+    private int statusSenha;
+
     public String getLogin() {
         return login;
     }
@@ -166,15 +175,6 @@ public class Voluntario{
     public void setDt_Cadastro(String dt_Cadastro) {
         this.dt_Cadastro = dt_Cadastro;
     }
-
-    public String getStatusSenha() {
-        return statusSenha;
-    }
-
-    public void setStatusSenha(String statusSenha) {
-        this.statusSenha = statusSenha;
-    }
-    private String statusSenha;
 
     
     

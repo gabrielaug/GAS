@@ -18,6 +18,7 @@ public class Morador {
     private String cpf;
     private String rg;
     private String org_Emissor;
+    private String ufEmissor;
     private String profissao;
     private String telefone;
     private String celular;
@@ -122,5 +123,12 @@ public class Morador {
         this.dt_Cadastro = dt_Cadastro;
     }
     
+     public String getUfEmissor() {
+        return ufEmissor;
+    }
+
+    public void setUfEmissor(String ufEmissor) {
+        this.ufEmissor = ufEmissor;
+    }
     
 }

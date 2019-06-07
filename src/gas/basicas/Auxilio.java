@@ -11,15 +11,15 @@ package gas.basicas;
  */
 public class Auxilio {
     
-    private int nr_Auix;
+    private int nr_Aux;
     private String descricao;
 
-    public int getNr_Auix() {
-        return nr_Auix;
+    public int getNr_Aux() {
+        return nr_Aux;
     }
 
-    public void setNr_Auix(int nr_Auix) {
-        this.nr_Auix = nr_Auix;
+    public void setNr_Aux(int nr_Aux) {
+        this.nr_Aux = nr_Aux;
     }
 
     public String getDescricao() {
