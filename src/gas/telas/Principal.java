@@ -35,15 +35,16 @@ public class Principal extends javax.swing.JFrame {
 
         jDesktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -58,12 +59,15 @@ public class Principal extends javax.swing.JFrame {
         );
         jDesktopLayout.setVerticalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
+
+        jMenu3.setText("DashBoard");
+        jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Cadastro");
 
-        jMenuItem1.setText("Cadastro da Família");
+        jMenuItem1.setText("Família");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -71,27 +75,26 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Cadastro de Usuário");
+        jMenuItem2.setText("Voluntário");
         jMenu1.add(jMenuItem2);
+
+        jMenuItem5.setText("Auxílio");
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem6.setText("Doação");
+        jMenu1.add(jMenuItem6);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Configurações");
 
-        jMenu5.setText(" c ");
+        jMenu5.setText("Parametros");
 
-        jMenu6.setText("Usuários");
+        jMenuItem7.setText("Usuários");
+        jMenu5.add(jMenuItem7);
 
-        jMenuItem3.setText("Permissões");
-        jMenu6.add(jMenuItem3);
-
-        jMenuItem4.setText("Desativar Usuário");
-        jMenu6.add(jMenuItem4);
-
-        jMenu5.add(jMenu6);
-
-        jMenu8.setText("Cadastro");
-        jMenu5.add(jMenu8);
+        jMenuItem8.setText("Geral");
+        jMenu5.add(jMenuItem8);
 
         jMenu2.add(jMenu5);
 
@@ -185,15 +188,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }
