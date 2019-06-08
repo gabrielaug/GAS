@@ -25,8 +25,27 @@ public class Morador {
     private double renda;
     private String deficiente;
     private String observacao;
+    private Date dt_Nascimento;
     private Date dt_Cadastro;
     private Familia familia;
+    private String representante;
+    
+    public Date getDt_Nascimento() {
+        return dt_Nascimento;
+    }
+
+    public void setDt_Nascimento(Date dt_Nascimento) {
+        this.dt_Nascimento = dt_Nascimento;
+    }
+    
+    public String getRepresentante() {
+        return representante;
+    }
+
+    public void setRepresentante(String representante) {
+        this.representante = representante;
+    }
+    
 
     public Familia getFamilia() {
         return familia;

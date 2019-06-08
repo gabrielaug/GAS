@@ -10,6 +10,7 @@ import gas.interfaces.InterfaceMorador;
 import gas.util.Conexao;
 import gas.util.DAOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class DAOMorador implements InterfaceMorador{
         
         Connection con = Conexao.getInstance().getConnection();
         
-        String sql = "INSERT INTO Morador (Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Nr_Familia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Morador (Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Dt_Nascimento,Nr_Familia,Representante) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -41,7 +42,9 @@ public class DAOMorador implements InterfaceMorador{
         pstm.setDouble(9,morador.getRenda());
         pstm.setString(10,morador.getDeficiente());
         pstm.setString(11,morador.getObservacao());
-        pstm.setInt(12, morador.getFamilia().getNr_Familia());
+        pstm.setDate(12, (Date) morador.getDt_Nascimento());
+        pstm.setInt(13, morador.getFamilia().getNr_Familia());
+        pstm.setString(14, morador.getRepresentante());
         
         try{
          
@@ -64,7 +67,7 @@ public class DAOMorador implements InterfaceMorador{
         Connection con = Conexao.getInstance().getConnection();
         
         String sql = "UPDATE Morador Nome = ?,CPF = ? ,RG = ?,ORG_Emissor = ?,UF_Emissor = ?,Profissao = ?,Telefone = ?,Celular = ?,Renda = ?,";
-                sql +="Deficiente = ?,Observacao = ? WHERE Cod_Morador = ?";
+                sql +="Deficiente = ?,Observacao = ?, Dt_Nascimento = ? WHERE Cod_Morador = ?";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -79,7 +82,8 @@ public class DAOMorador implements InterfaceMorador{
         pstm.setDouble(9,morador.getRenda());
         pstm.setString(10,morador.getDeficiente());
         pstm.setString(11,morador.getObservacao());
-        pstm.setInt(16, morador.getCod_Morador());
+        pstm.setDate(12, (Date) morador.getDt_Nascimento());
+        pstm.setInt(13, morador.getCod_Morador());
         
         try{
          
@@ -127,17 +131,17 @@ public class DAOMorador implements InterfaceMorador{
     @Override
     public ArrayList<Morador> listarMorador(Morador morador) throws DAOException, SQLException {
        
-        
+       /* 
         ArrayList<Morador> lista = new ArrayList<>();
 
 
            Connection con = Conexao.getInstance().getConnection();
 
-           String sql = "SELECT Morador (Cod_Morador,Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Nr_Familia FROM Morador WHERE Nr_Familia = ?";
+           String sql = "SELECT Morador (Cod_Morador,Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Nr_Familia FROM Morador WHERE Cod_Morador = ?";
 
            PreparedStatement pstm;
            pstm = con.prepareStatement(sql);
-           pstm.setInt(1,morador.getFamilia().getNr_Familia());
+           pstm.setInt(1,morador.getCod_Morador());
            ResultSet rs = null;
 
            try{
@@ -170,7 +174,9 @@ public class DAOMorador implements InterfaceMorador{
                Conexao.closeConnection(con, pstm, rs);
            }
            return lista;
-        
+        */
+       
+       return null;
     }
 
     @Override
@@ -181,7 +187,8 @@ public class DAOMorador implements InterfaceMorador{
         
         Connection con = Conexao.getInstance().getConnection();
         
-        String sql = "SELECT Morador (Cod_Morador,Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Nr_Familia FROM Morador WHERE Cod_Morador= ?";
+        String sql = "SELECT Morador (Cod_Morador,Nome,CPF,RG,ORG_Emissor,UF_Emissor,Profissao,Telefone,Celular,Renda,Deficiente,Observacao,Dt_Nascimento,Dt_Cadastro,Nr_Familia,Representante"
+                + " FROM Morador WHERE Cod_Morador= ?";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -204,7 +211,10 @@ public class DAOMorador implements InterfaceMorador{
                retorno.setRenda(rs.getDouble("Renda"));
                retorno.setDeficiente(rs.getString("Deficiente"));
                retorno.setObservacao(rs.getString("Observacao"));
+               retorno.setDt_Nascimento(rs.getDate("Dt_Nascimento"));
+               retorno.setDt_Cadastro(rs.getDate("Dt_Cadastro"));
                retorno.getFamilia().setNr_Familia(rs.getInt("Nr_Familia"));
+               retorno.setRepresentante(rs.getString("Representante"));
             
         }
         }
