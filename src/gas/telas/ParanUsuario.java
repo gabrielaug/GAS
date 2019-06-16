@@ -31,27 +31,31 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        checkbox2 = new java.awt.Checkbox();
-        checkbox3 = new java.awt.Checkbox();
-        checkbox4 = new java.awt.Checkbox();
-        checkbox5 = new java.awt.Checkbox();
-        checkbox6 = new java.awt.Checkbox();
-        checkbox7 = new java.awt.Checkbox();
-        checkbox8 = new java.awt.Checkbox();
         jSeparator1 = new javax.swing.JSeparator();
-        checkbox1 = new java.awt.Checkbox();
         jSeparator2 = new javax.swing.JSeparator();
-        checkbox9 = new java.awt.Checkbox();
-        checkbox10 = new java.awt.Checkbox();
-        checkbox11 = new java.awt.Checkbox();
-        checkbox12 = new java.awt.Checkbox();
-        checkbox13 = new java.awt.Checkbox();
-        checkbox14 = new java.awt.Checkbox();
+        chkInativarUsuario = new javax.swing.JCheckBox();
+        chkResetSenha = new javax.swing.JCheckBox();
+        chkCadVolun = new javax.swing.JCheckBox();
+        chkAlterDadosVolun = new javax.swing.JCheckBox();
+        chkCadFamilia = new javax.swing.JCheckBox();
+        chkCadMorador = new javax.swing.JCheckBox();
+        chkExcDoacao = new javax.swing.JCheckBox();
+        chkAlterDadosFamilia = new javax.swing.JCheckBox();
+        chkAlterDadosMorador = new javax.swing.JCheckBox();
+        chkAlterConfigSistema = new javax.swing.JCheckBox();
+        chkGerarRelatorio = new javax.swing.JCheckBox();
+        chkCadDoacao = new javax.swing.JCheckBox();
+        chkAlterDoacao = new javax.swing.JCheckBox();
+        chkGerenUsuario = new javax.swing.JCheckBox();
         jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        btnSair = new javax.swing.JButton();
+        btnGravar = new javax.swing.JButton();
+        btnDesabilitarTodos = new javax.swing.JButton();
+        btnHabilitarTodos = new javax.swing.JButton();
+
+        setTitle("Permissões de Usuário");
+        setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Login:");
@@ -60,47 +64,47 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        checkbox2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox2.setLabel("Altera Dados de Voluntario");
+        chkInativarUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkInativarUsuario.setText("Inativo");
 
-        checkbox3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox3.setLabel("Cadastra Voluntario");
+        chkResetSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkResetSenha.setText("Resetar a Senha");
 
-        checkbox4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox4.setLabel("Cadastra Familia");
+        chkCadVolun.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkCadVolun.setText("Cadastra Voluntário");
 
-        checkbox5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox5.setLabel("Altera Dados da Familia");
+        chkAlterDadosVolun.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkAlterDadosVolun.setText("Altera Dados de Voluntário");
 
-        checkbox6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox6.setLabel("Cadastra Morador");
+        chkCadFamilia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkCadFamilia.setText("Cadastra Família");
 
-        checkbox7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox7.setLabel("Cadastra Doações");
+        chkCadMorador.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkCadMorador.setText("Cadastra Morador");
 
-        checkbox8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox8.setLabel("Altera Dados do Morador");
+        chkExcDoacao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkExcDoacao.setText("Excluir Doações");
 
-        checkbox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox1.setLabel("Resetar a Senha");
+        chkAlterDadosFamilia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkAlterDadosFamilia.setText("Altera Dados da Família");
 
-        checkbox9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox9.setLabel("Altera Configurações do Sistema");
+        chkAlterDadosMorador.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkAlterDadosMorador.setText("Altera Dados do Morador");
 
-        checkbox10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox10.setLabel("Inativo");
+        chkAlterConfigSistema.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkAlterConfigSistema.setText("Altera Configurações do Sistema");
 
-        checkbox11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox11.setLabel("Gera Relatórios");
+        chkGerarRelatorio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkGerarRelatorio.setText("Gerar Relatórios");
 
-        checkbox12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox12.setLabel("Altera Doações");
+        chkCadDoacao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkCadDoacao.setText("Cadastra Doações");
 
-        checkbox13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox13.setLabel("Excluir Doações");
+        chkAlterDoacao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkAlterDoacao.setText("Altera Doações");
 
-        checkbox14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        checkbox14.setLabel("Gerenciar Usuário");
+        chkGerenUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkGerenUsuario.setText("Gerenciar Usuário");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,35 +116,35 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(chkInativarUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(chkResetSenha))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(checkbox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(checkbox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(checkbox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(checkbox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
+                                        .addComponent(chkAlterConfigSistema)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chkGerarRelatorio))
+                                    .addComponent(chkGerenUsuario))
+                                .addGap(33, 33, 33)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(chkCadDoacao)
+                                    .addComponent(chkAlterDoacao)
+                                    .addComponent(chkExcDoacao)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkCadVolun)
+                                    .addComponent(chkAlterDadosVolun))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkCadFamilia)
+                                    .addComponent(chkAlterDadosFamilia))
+                                .addGap(14, 14, 14)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkCadMorador)
+                                    .addComponent(chkAlterDadosMorador))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -148,80 +152,120 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkbox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkInativarUsuario)
+                    .addComponent(chkResetSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkbox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkbox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkbox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkCadVolun)
+                            .addComponent(chkCadMorador)))
+                    .addComponent(chkCadFamilia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(checkbox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(checkbox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chkAlterDadosVolun)
+                            .addComponent(chkAlterDadosFamilia))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(chkAlterDadosMorador)
+                        .addGap(18, 18, 18)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkbox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkbox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkbox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkbox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkbox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkAlterConfigSistema)
+                    .addComponent(chkGerarRelatorio)
+                    .addComponent(chkCadDoacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkbox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkAlterDoacao)
+                    .addComponent(chkGerenUsuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkExcDoacao)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jTextField2.setEnabled(false);
 
-        jButton2.setText("Salvar");
+        jPanel4.setBackground(new java.awt.Color(0, 51, 102));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton3.setText("Habilitar Todos");
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Desabilitar Todos");
+        btnGravar.setText("Gravar");
 
-        jButton5.setText("Sair");
+        btnDesabilitarTodos.setText("Desabilitar Todos");
+        btnDesabilitarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesabilitarTodosActionPerformed(evt);
+            }
+        });
+
+        btnHabilitarTodos.setText("Habilitar Todos");
+        btnHabilitarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHabilitarTodosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnHabilitarTodos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDesabilitarTodos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnGravar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHabilitarTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDesabilitarTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,40 +274,78 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnHabilitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilitarTodosActionPerformed
+    
+        chkAlterConfigSistema.setSelected(true);
+        chkAlterDadosFamilia.setSelected(true);
+        chkAlterDadosMorador.setSelected(true);
+        chkAlterDadosVolun.setSelected(true);
+        chkAlterDoacao.setSelected(true);
+        chkCadDoacao.setSelected(true);
+        chkCadFamilia.setSelected(true);
+        chkCadMorador.setSelected(true);
+        chkCadVolun.setSelected(true);
+        chkExcDoacao.setSelected(true);
+        chkGerarRelatorio.setSelected(true);
+        chkGerenUsuario.setSelected(true);
+        
+
+    }//GEN-LAST:event_btnHabilitarTodosActionPerformed
+
+    private void btnDesabilitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesabilitarTodosActionPerformed
+        
+        chkAlterConfigSistema.setSelected(false);
+        chkAlterDadosFamilia.setSelected(false);
+        chkAlterDadosMorador.setSelected(false);
+        chkAlterDadosVolun.setSelected(false);
+        chkAlterDoacao.setSelected(false);
+        chkCadDoacao.setSelected(false);
+        chkCadFamilia.setSelected(false);
+        chkCadMorador.setSelected(false);
+        chkCadVolun.setSelected(false);
+        chkExcDoacao.setSelected(false);
+        chkGerarRelatorio.setSelected(false);
+        chkGerenUsuario.setSelected(false);
+        
+        
+        
+    }//GEN-LAST:event_btnDesabilitarTodosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Checkbox checkbox1;
-    private java.awt.Checkbox checkbox10;
-    private java.awt.Checkbox checkbox11;
-    private java.awt.Checkbox checkbox12;
-    private java.awt.Checkbox checkbox13;
-    private java.awt.Checkbox checkbox14;
-    private java.awt.Checkbox checkbox2;
-    private java.awt.Checkbox checkbox3;
-    private java.awt.Checkbox checkbox4;
-    private java.awt.Checkbox checkbox5;
-    private java.awt.Checkbox checkbox6;
-    private java.awt.Checkbox checkbox7;
-    private java.awt.Checkbox checkbox8;
-    private java.awt.Checkbox checkbox9;
+    private javax.swing.JButton btnDesabilitarTodos;
+    private javax.swing.JButton btnGravar;
+    private javax.swing.JButton btnHabilitarTodos;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JCheckBox chkAlterConfigSistema;
+    private javax.swing.JCheckBox chkAlterDadosFamilia;
+    private javax.swing.JCheckBox chkAlterDadosMorador;
+    private javax.swing.JCheckBox chkAlterDadosVolun;
+    private javax.swing.JCheckBox chkAlterDoacao;
+    private javax.swing.JCheckBox chkCadDoacao;
+    private javax.swing.JCheckBox chkCadFamilia;
+    private javax.swing.JCheckBox chkCadMorador;
+    private javax.swing.JCheckBox chkCadVolun;
+    private javax.swing.JCheckBox chkExcDoacao;
+    private javax.swing.JCheckBox chkGerarRelatorio;
+    private javax.swing.JCheckBox chkGerenUsuario;
+    private javax.swing.JCheckBox chkInativarUsuario;
+    private javax.swing.JCheckBox chkResetSenha;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;

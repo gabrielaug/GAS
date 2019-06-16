@@ -155,6 +155,44 @@ public class DAODoacao implements InterfaceDoacao{
         
         
     }
+
+    @Override
+    public boolean pesquisarMov(Doacao doacao) throws DAOException, SQLException {
+        
+        
+        boolean retorno = false;
+        
+        
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "SELECT Nr_Doacao FROM Doacao_Familia WHERE Nr_Doacao = ?";
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setInt(1, doacao.getNr_Doacao());
+        ResultSet rs = null;
+        
+        try{
+        rs = pstm.executeQuery();
+        
+        if(rs.next()){
+            retorno = true;
+            
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+            Conexao.closeConnection(con, pstm, rs);
+        }
+        return retorno;
+        
+        
+        
+        
+        
+    }
     
     
     

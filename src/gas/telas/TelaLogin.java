@@ -5,49 +5,37 @@
  */
 package gas.telas;
 
+import com.sun.glass.events.KeyEvent;
 import java.security.NoSuchAlgorithmException;
 import gas.basicas.Voluntario;
+import gas.regra.RNVoluntario;
+import gas.util.CustomDocument;
+import gas.util.DAOException;
 import gas.util.MD5;
-
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Gabriel Augusto
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    Voluntario  voluntario;
+    private Voluntario  voluntario;
     
     /**
      * Creates new form TelaLogin
      */
     public TelaLogin() {
         initComponents();
+        txtLogin.setDocument(new CustomDocument());
+        txtSenha.setDocument(new CustomDocument());
         voluntario  = new Voluntario();
     }
 
   
     
-    public void logar() throws NoSuchAlgorithmException{
-        
-        voluntario.setLogin(this.txtLogin.getText());
-        
-        MD5 md5 = new MD5();
-        
-        voluntario.setSenha(md5.converter(this.txtSenha.getPassword().toString()));
-        
-       
-        
-        
-        
-    }
-    
- 
-  
-  
-    
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,6 +67,12 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
+
         lblLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblLogin.setText("Login:");
 
@@ -86,8 +80,23 @@ public class TelaLogin extends javax.swing.JFrame {
         lblSenha.setText("Senha:");
 
         btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+        btnEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnEntrarKeyPressed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gas/util/imagens/GAS.png"))); // NOI18N
 
@@ -156,6 +165,53 @@ public class TelaLogin extends javax.swing.JFrame {
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+       
+      RNVoluntario rnVoluntario = new RNVoluntario();
+      Voluntario retorno;
+      
+        voluntario.setLogin(this.txtLogin.getText());
+        
+        MD5 md5 = new MD5();
+        
+        try {
+            
+            voluntario.setSenha(md5.converter(String.valueOf(this.txtSenha.getPassword())));
+            
+            retorno = rnVoluntario.loginVoluntario(voluntario);
+            if(retorno.getLogin() != null){
+                
+               Principal principal = new Principal(retorno);
+                principal.setVisible(true);   
+                this.dispose(); 
+            }
+              
+        } catch (NoSuchAlgorithmException | DAOException | SQLException ex) {
+        }
+            
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnEntrar.doClick();
+        }
+        
+    }//GEN-LAST:event_txtSenhaKeyPressed
+
+    private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
+       
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnEntrar.doClick();
+        }
+        
+    }//GEN-LAST:event_btnEntrarKeyPressed
 
     /**
      * @param args the command line arguments

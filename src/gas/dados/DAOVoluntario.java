@@ -142,7 +142,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
         Connection con = Conexao.getInstance().getConnection();
         
         String sql = "SELECT Login,Senha,Nome,CPF,Profissao,Endereco,Complemento,Numero,Bairro,Cidade,UF,CEP,";
-        sql+="Telefone,Celular,Dt_Nascumento,Status,Dt_Cadastro,StatusSenha)";
+        sql+="Telefone,Celular,Dt_Nascumento,Status,Dt_Cadastro,StatusSenha FROM Voluntario)";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -197,7 +197,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
         Connection con = Conexao.getInstance().getConnection();
         
         String sql = "SELECT Login,Senha,Nome,CPF,Profissao,Endereco,Complemento,Numero,Bairro,Cidade,UF,CEP,";
-        sql+="Telefone,Celular,Dt_Nascumento,Status,Dt_Cadastro,StatusSenha WHERE = Login = ?)";
+        sql+="Telefone,Celular,Dt_Nascumento,Status,Dt_Cadastro,StatusSenha FROM Voluntario WHERE Login = ?)";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -235,6 +235,53 @@ public class DAOVoluntario implements InterfaceVoluntario{
             Conexao.closeConnection(con, pstm, rs);
         }
         return retorno;
+        
+        
+    }
+
+    
+    
+    /**
+     * VERIFICAR SE EXISTE O USUARIO NO BANCO DE DADOS
+     * @param voluntario OBJETO COM O USUARIO A SER PROCURADO
+     * @return RETORNA TRUE SE O VOLUNTARIO EXISTIR
+     * @throws DAOException
+     * @throws SQLException 
+     */
+    @Override
+    public Voluntario loginVoluntario(Voluntario voluntario) throws DAOException, SQLException {
+        
+        Voluntario retorno = new Voluntario();
+        
+        
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "SELECT Login,Senha,Status FROM Voluntario WHERE Login = ? and Senha = ?";
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, voluntario.getLogin());
+        pstm.setString(2, voluntario.getSenha());
+        ResultSet rs = null;
+        
+        try{
+        rs = pstm.executeQuery();
+        
+        if(rs.next()){ 
+            retorno.setLogin(rs.getString("Login"));
+            retorno.setSenha(rs.getString("Senha"));
+            retorno.setStatus(rs.getString("Status"));
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+            Conexao.closeConnection(con, pstm, rs);
+        }
+        return retorno;
+        
+        
         
         
     }

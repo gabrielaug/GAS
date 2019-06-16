@@ -22,5 +22,6 @@ public interface InterfaceVoluntario {
     public void excluir(Voluntario voluntario) throws DAOException, SQLException;
     public ArrayList<Voluntario> listarVoluntario () throws DAOException, SQLException;
     public Voluntario pesquisar(Voluntario voluntario) throws DAOException, SQLException;
+    public Voluntario loginVoluntario (Voluntario voluntario) throws DAOException, SQLException;
     
 }

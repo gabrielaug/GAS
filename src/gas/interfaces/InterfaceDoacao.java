@@ -20,5 +20,6 @@ public interface InterfaceDoacao {
     public void excluir(Doacao doacao) throws DAOException, SQLException;
     public ArrayList<Doacao> listarDoacao () throws DAOException, SQLException;
     public Doacao pesquisar(Doacao doacao) throws DAOException, SQLException;
+    public boolean pesquisarMov (Doacao doacao) throws DAOException, SQLException;
     
 }

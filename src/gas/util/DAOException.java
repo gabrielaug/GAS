@@ -19,6 +19,7 @@ public class DAOException extends Exception {
     
     public DAOException(String x,int y){
         
+       
         switch (y){
             case 1:
                JOptionPane.showMessageDialog(null, x,"Erro",JOptionPane.ERROR_MESSAGE);

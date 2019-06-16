@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  */
 public class Conexao {
     // DRIVER MYSQL (DRIVER - PORTA DE ENTRADA - USUARIO - SENHA)
-    ResourceBundle rb = ResourceBundle.getBundle("delivery.util.config"); 
+    ResourceBundle rb = ResourceBundle.getBundle("gas.util.config"); 
     private final String DRIVER = "com.mysql.jdbc.Driver";
     private final String URL = rb.getString("url");
     private final String USER = rb.getString("user");
