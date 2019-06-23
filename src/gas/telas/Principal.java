@@ -28,8 +28,28 @@ public class Principal extends javax.swing.JFrame {
     public Principal(Voluntario voluntario){
         initComponents();
         this.voluntario = voluntario;
-   
+        acessos();
     }
+    
+    
+    /**
+     * BLOQUEIO DE MENUS POR REGAR DE PERMISSÕES
+     */
+    private void acessos(){
+        
+        if(voluntario.getAcessoUsuario().getGerenUser().equalsIgnoreCase("N")){
+            this.menuGerenUser.setEnabled(false);
+            
+        }
+        
+        if(voluntario.getAcessoUsuario().getAltParan().equalsIgnoreCase("N")){
+            this.menuParamGeral.setEnabled(false);
+            
+        }
+        
+    }
+    
+    
     
     
     
@@ -54,10 +74,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        menuGerenUser = new javax.swing.JMenuItem();
+        menuParamGeral = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         MenuSobre = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,7 +96,7 @@ public class Principal extends javax.swing.JFrame {
         );
         jDesktopLayout.setVerticalGroup(
             jDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGap(0, 746, Short.MAX_VALUE)
         );
 
         MenuDashBoard.setText("DashBoard");
@@ -106,6 +131,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem6.setText("Doação");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,27 +146,46 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu5.setText("Parametros");
 
-        jMenuItem7.setText("Usuários");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        menuGerenUser.setText("Usuários");
+        menuGerenUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                menuGerenUserActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem7);
+        jMenu5.add(menuGerenUser);
 
-        jMenuItem8.setText("Geral");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        menuParamGeral.setText("Geral");
+        menuParamGeral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                menuParamGeralActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem8);
+        jMenu5.add(menuParamGeral);
 
         jMenu2.add(jMenu5);
 
         jMenuBar1.add(jMenu2);
 
         jMenu7.setText("Relatórios");
+
+        jMenuItem7.setText("Voluntarios");
+        jMenu7.add(jMenuItem7);
+
+        jMenuItem8.setText("Famílias");
+        jMenu7.add(jMenuItem8);
+
+        jMenuItem9.setText("Doações por Familia");
+        jMenu7.add(jMenuItem9);
+
+        jMenuItem4.setText("SQL Avançado");
+        jMenuItem4.setEnabled(false);
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem4);
+
         jMenuBar1.add(jMenu7);
 
         MenuSobre.setText("Sobre");
@@ -155,6 +200,24 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(MenuSobre);
+
+        jMenu3.setText("Trocar de Usuário");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+        jMenu3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMenu3KeyPressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sair");
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,22 +275,23 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void menuGerenUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenUserActionPerformed
         
         ParanUsuario paranUsuario = new ParanUsuario();
         jDesktop.add(paranUsuario);
         paranUsuario.setVisible(true);
         
         
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_menuGerenUserActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void menuParamGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuParamGeralActionPerformed
         
         ParanGeral paranGeral = new ParanGeral();
         jDesktop.add(paranGeral);
         paranGeral.setVisible(true);
+        paranGeral.aviso();
         
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_menuParamGeralActionPerformed
 
     private void MenuSobreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MenuSobreKeyPressed
         // TODO add your handling code here:
@@ -243,7 +307,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
 
-        CadAuxilio cadAuxilio = new CadAuxilio();
+        CadAuxilio cadAuxilio = new CadAuxilio(this.voluntario);
         jDesktop.add(cadAuxilio);
         cadAuxilio.setVisible(true);
         
@@ -251,11 +315,33 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
        
-        CadDoacao cadDoacao = new CadDoacao();
+        CadDoacao cadDoacao = new CadDoacao(this.voluntario);
         jDesktop.add(cadDoacao);
         cadDoacao.setVisible(true);  
         
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenu3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenu3KeyPressed
+        
+    
+        
+    }//GEN-LAST:event_jMenu3KeyPressed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+       TelaLogin telaLogin =  new TelaLogin();
+        telaLogin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        SqlAvan sqlAvan = new SqlAvan();
+        jDesktop.add(sqlAvan);
+        sqlAvan.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
    
     /**
      * @param args the command line arguments
@@ -298,6 +384,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
@@ -305,9 +392,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem menuGerenUser;
+    private javax.swing.JMenuItem menuParamGeral;
     // End of variables declaration//GEN-END:variables
 }

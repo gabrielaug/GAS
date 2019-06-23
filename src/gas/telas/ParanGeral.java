@@ -5,6 +5,8 @@
  */
 package gas.telas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gabriel Augusto
@@ -16,6 +18,11 @@ public class ParanGeral extends javax.swing.JInternalFrame {
      */
     public ParanGeral() {
         initComponents();
+        
+    }
+    
+    public void aviso(){
+        JOptionPane.showMessageDialog(this, "Responda com Sim ou Não","Aviso",JOptionPane.WARNING_MESSAGE);
     }
 
     /**
@@ -60,9 +67,10 @@ public class ParanGeral extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
+                {"Licença", null},
+                {"Iniciar maximizado", null},
+                {"Atualizar permissão do usuáriologo após alterar?", null},
+                {"Solicitar alteração de senha no primeiro acesso?", null},
                 {null, null}
             },
             new String [] {
@@ -86,9 +94,9 @@ public class ParanGeral extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

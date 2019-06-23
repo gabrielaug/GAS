@@ -18,8 +18,10 @@ public interface InterfaceAuxilio {
     
     
     public void inserir(Auxilio auxilio) throws DAOException, SQLException;
+    public void alterar(Auxilio auxilio) throws DAOException, SQLException;
     public void excluir(Auxilio auxilio) throws DAOException, SQLException;
     public ArrayList<Auxilio> listarAuxilio () throws DAOException, SQLException;
     public Auxilio pesquisar(Auxilio auxilio) throws DAOException, SQLException;
+    public boolean pesquisarMov (Auxilio auxilio) throws DAOException, SQLException;
     
 }

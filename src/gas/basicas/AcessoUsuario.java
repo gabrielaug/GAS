@@ -12,7 +12,7 @@ package gas.basicas;
 public class AcessoUsuario {
     
     
-    private Voluntario voluntario = new Voluntario();
+    //private Voluntario voluntario = new Voluntario();
     private String cadVolun;
     private String altVolun;
     private String cadFami;
@@ -24,15 +24,45 @@ public class AcessoUsuario {
     private String GerenUser;
     private String CadDoa;
     private String AltDoa;
-    private String ExcDoa; 
-
-    public Voluntario getVoluntario() {
-        return voluntario;
+    private String ExcDoa;
+    private String cadAux;
+    private String altAux;
+    private String excAux;
+    
+    public String getAltAux() {
+        return altAux;
     }
 
-    public void setVoluntario(Voluntario voluntario) {
-        this.voluntario = voluntario;
+    public void setAltAux(String altAux) {
+        this.altAux = altAux;
     }
+    
+    
+    public String getCadAux() {
+        return cadAux;
+    }
+
+    public void setCadAux(String cadAux) {
+        this.cadAux = cadAux;
+    }
+
+
+    public String getExcAux() {
+        return excAux;
+    }
+
+    public void setExcAux(String excAux) {
+        this.excAux = excAux;
+    }
+    
+
+//    public Voluntario getVoluntario() {
+//        return voluntario;
+//    }
+//
+//    public void setVoluntario(Voluntario voluntario) {
+//        this.voluntario = voluntario;
+//    }
 
     public String getCadVolun() {
         return cadVolun;

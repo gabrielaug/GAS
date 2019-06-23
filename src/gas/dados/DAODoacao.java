@@ -193,6 +193,31 @@ public class DAODoacao implements InterfaceDoacao{
         
         
     }
+
+    @Override
+    public void alterar(Doacao doacao) throws DAOException, SQLException {
+        
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "UPDATE Doacao SET Descricao = ? WHERE Nr_Doacao = ?";
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1,doacao.getDescricao());
+        pstm.setInt(2, doacao.getNr_Doacao());
+        
+        try{
+         
+        pstm.executeUpdate();
+            
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+           Conexao.closeConnection(con, pstm); 
+        }
+    }
     
     
     

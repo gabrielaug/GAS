@@ -6,27 +6,35 @@
 
 package gas.telas;
 
+import com.sun.glass.events.KeyEvent;
 import gas.basicas.Auxilio;
+import gas.basicas.Voluntario;
 import gas.regra.RNAuxilio;
+import gas.util.CustomDocument;
 import gas.util.DAOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Gabriel Augusto
  */
 public class CadAuxilio extends javax.swing.JInternalFrame {
-    
-    private Auxilio auxilio;
-    private RNAuxilio rnAuxilio;
 
-    /** Creates new form CadAuxilio */
-    public CadAuxilio() {
+    private RNAuxilio rnAuxilio;
+    private Voluntario voluntario;
+    
+    /** Creates new form CadDoacao
+     * @param x */
+    public CadAuxilio(Voluntario x) {
         initComponents();
-        auxilio = new Auxilio();
         rnAuxilio = new RNAuxilio();
+        this.voluntario = x;
+        txtDescricao.setDocument(new CustomDocument());
+        lista();
+        txtDescricao.grabFocus();
         
     }
 
@@ -41,7 +49,7 @@ public class CadAuxilio extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
+        tbAuxilio = new javax.swing.JTable();
         txtDescricao = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
@@ -52,7 +60,7 @@ public class CadAuxilio extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Descrição:");
 
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
+        tbAuxilio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -60,14 +68,14 @@ public class CadAuxilio extends javax.swing.JInternalFrame {
                 {null, null}
             },
             new String [] {
-                "Auxilio", "Descrição"
+                "Auxílio", "Descrição"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -78,12 +86,28 @@ public class CadAuxilio extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable);
-        if (jTable.getColumnModel().getColumnCount() > 0) {
-            jTable.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        tbAuxilio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbAuxilioMouseClicked(evt);
+            }
+        });
+        tbAuxilio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbAuxilioKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbAuxilio);
+        if (tbAuxilio.getColumnModel().getColumnCount() > 0) {
+            tbAuxilio.getColumnModel().getColumn(0).setMinWidth(55);
+            tbAuxilio.getColumnModel().getColumn(0).setPreferredWidth(55);
+            tbAuxilio.getColumnModel().getColumn(0).setMaxWidth(55);
         }
+
+        txtDescricao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescricaoKeyPressed(evt);
+            }
+        });
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,8 +115,14 @@ public class CadAuxilio extends javax.swing.JInternalFrame {
                 btnCadastrarActionPerformed(evt);
             }
         });
+        btnCadastrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCadastrarKeyPressed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
+        btnSair.setFocusable(false);
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
@@ -153,21 +183,150 @@ public class CadAuxilio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    
+        if(this.voluntario.getAcessoUsuario().getCadAux().equalsIgnoreCase("S")){
+        
+            Auxilio auxilio = new Auxilio();
+        
+        auxilio.setDescricao(txtDescricao.getText());
        
-        Auxilio auxilioCad = new Auxilio();
-        
-        auxilioCad.setDescricao(txtDescricao.getText());
-        
         
         try {
-            rnAuxilio.inserir(auxilioCad);
+            rnAuxilio.inserir(auxilio);
+            txtDescricao.setText("");
+            lista();
+            txtDescricao.grabFocus();
         } catch (DAOException | SQLException ex) {
             
         }
-
         
+            
+        }else{
+            JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+   
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void txtDescricaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescricaoKeyPressed
+        
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnCadastrar.grabFocus();
+        }
+        
+        
+    }//GEN-LAST:event_txtDescricaoKeyPressed
+
+    private void btnCadastrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCadastrarKeyPressed
+       
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnCadastrar.doClick();
+            
+            
+        }
+        
+        
+    }//GEN-LAST:event_btnCadastrarKeyPressed
+
+    private void tbAuxilioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAuxilioMouseClicked
+        
+    }//GEN-LAST:event_tbAuxilioMouseClicked
+
+    private void tbAuxilioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAuxilioKeyPressed
+       
+        if(evt.getKeyCode() == KeyEvent.VK_DELETE ){
+            
+            Auxilio auxilioEx = new Auxilio();
+            
+                int linha;
+   
+                        linha = tbAuxilio.getSelectedRow();
+                        auxilioEx.setNr_Aux(Integer.parseInt(tbAuxilio.getValueAt(linha,0).toString()));
+                        
+              try {
+                   int confirma = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja excluir este Auxílio?","Excluir Auxílio",JOptionPane.YES_NO_CANCEL_OPTION);
+                if(confirma == JOptionPane.YES_OPTION){
+                 
+                    if(this.voluntario.getAcessoUsuario().getExcAux().equalsIgnoreCase("S")){
+                     
+                        rnAuxilio.excluir(auxilioEx);
+                        JOptionPane.showMessageDialog(this,"Excluido com Sucesso!","",JOptionPane.INFORMATION_MESSAGE);
+                        lista();
+
+                    }else{
+                        JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                }
+                  
+              } catch (DAOException | SQLException ex) {
+                 
+              }
+
+          
+        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER ){ // Alterar Auxílio     
+            
+            Auxilio auxilioAlt = new Auxilio();
+            
+                int linha;
+   
+                        linha = tbAuxilio.getSelectedRow();
+                        auxilioAlt.setNr_Aux(Integer.parseInt(tbAuxilio.getValueAt(linha,0).toString()));
+                        auxilioAlt.setDescricao(tbAuxilio.getValueAt(linha, 1).toString());
+                        
+              try {
+                   int confirma = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja alterar a descrição deste Auxílio?","Alterar Auxílio",JOptionPane.YES_NO_CANCEL_OPTION);
+                if(confirma == JOptionPane.YES_OPTION){
+                 
+                    if(this.voluntario.getAcessoUsuario().getAltAux().equalsIgnoreCase("S")){
+                     
+                        rnAuxilio.alterar(auxilioAlt);
+                        JOptionPane.showMessageDialog(this,"Alterado com Sucesso!","",JOptionPane.INFORMATION_MESSAGE);
+                        lista();
+
+                    }else{
+                        JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                }
+                  
+              } catch (DAOException | SQLException ex) {
+                 
+              }
+
+          
+        }
+        
+    }//GEN-LAST:event_tbAuxilioKeyPressed
+
+    
+    public void lista(){
+        RNAuxilio rnAux = new RNAuxilio(); //CRIAR A INSTANCIA DA FACHADA
+        DefaultTableModel modelo = new DefaultTableModel(); // INSTANCIA O OBJETO PADRÃO DE TABELA - ADICIONE A IMPORTAÇÃO
+        ArrayList<Auxilio> lista = new ArrayList(); // CRIA UMA LISTA, DE ARRAYLIST DE LIVRO
+        try {
+            lista =  rnAux.listarAuxilio(); // BUSCA OS DADOS DO BANCO PARA A LISTA
+        } catch (Exception ex) {
+            
+        }   
+       modelo = (DefaultTableModel) tbAuxilio.getModel(); // CHECA O JTABLE PARA RECEBER OS DADOS
+        if(modelo.getRowCount() > 0){  //se existir linha 
+            modelo.setRowCount(0); // apaga todas as linhas
+        }
+        for (Auxilio auxilio : lista) { 
+            modelo.addRow(new Object[]{auxilio.getNr_Aux(),
+                                       auxilio.getDescricao()
+                                       
+            });
+        } // TRAS AS INFORMAÇÕES NA TABELA COM OS DADOS SOLICITADOS.
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
@@ -175,7 +334,7 @@ public class CadAuxilio extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable;
+    private javax.swing.JTable tbAuxilio;
     private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
 

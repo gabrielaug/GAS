@@ -141,8 +141,10 @@ public class DAOVoluntario implements InterfaceVoluntario{
         
         Connection con = Conexao.getInstance().getConnection();
         
-        String sql = "SELECT Login,Senha,Nome,CPF,Profissao,Endereco,Complemento,Numero,Bairro,Cidade,UF,CEP,";
-        sql+="Telefone,Celular,Dt_Nascumento,Status,Dt_Cadastro,StatusSenha FROM Voluntario)";
+        String sql = "SELECT v.Login,v.Senha,v.Nome,v.CPF,v.Profissao,v.Endereco,v.Complemento,v.Numero,v.Bairro,v.Cidade,v.UF,v.CEP,"
+                +"v.Telefone,v.Celular,v.Dt_Nascumento,v.`Status`,v.Dt_Cadastro,v.StatusSenha,a.CadVolun,a.AltVolun,a.CadFami,a.AltFami,"
+                +"a.CadMora,a.AltMora,a.GerRel,a.AltParan,a.GerenUser,a.CadDoa,a.AltDoa,a.ExcDoa,a.CadAux,a.AltAux,a.ExcAux FROM Voluntario as v\n"
+                +"INNER JOIN Acessos AS a ON a.login = v.login";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -172,6 +174,21 @@ public class DAOVoluntario implements InterfaceVoluntario{
             voluntario.setStatus(rs.getString("Status"));
             voluntario.setDt_Cadastro(rs.getString("Dt_Cadastro"));
             voluntario.setStatusSenha(rs.getInt("StatusSenha"));
+            voluntario.getAcessoUsuario().setCadVolun(rs.getString("CadVolun"));
+            voluntario.getAcessoUsuario().setAltVolun(rs.getString("AltVolun"));
+            voluntario.getAcessoUsuario().setCadFami(rs.getString("CadFami"));
+            voluntario.getAcessoUsuario().setAltFami(rs.getString("AltFami"));
+            voluntario.getAcessoUsuario().setCadMora(rs.getString("CadMora"));
+            voluntario.getAcessoUsuario().setAltMora(rs.getString("AltMora"));
+            voluntario.getAcessoUsuario().setGerRel(rs.getString("GerRel"));
+            voluntario.getAcessoUsuario().setAltParan(rs.getString("AltParan"));
+            voluntario.getAcessoUsuario().setGerenUser(rs.getString("GerenUser"));
+            voluntario.getAcessoUsuario().setCadDoa(rs.getString("CadDoa"));
+            voluntario.getAcessoUsuario().setAltDoa(rs.getString("AltDoa"));
+            voluntario.getAcessoUsuario().setExcDoa(rs.getString("ExcDoa"));
+            voluntario.getAcessoUsuario().setCadAux(rs.getString("CadAux"));
+            voluntario.getAcessoUsuario().setAltAux(rs.getString("AltAux"));
+            voluntario.getAcessoUsuario().setExcAux(rs.getString("ExcAux"));
             lista.add(voluntario);
         }
         }
@@ -196,8 +213,10 @@ public class DAOVoluntario implements InterfaceVoluntario{
         
         Connection con = Conexao.getInstance().getConnection();
         
-        String sql = "SELECT Login,Senha,Nome,CPF,Profissao,Endereco,Complemento,Numero,Bairro,Cidade,UF,CEP,";
-        sql+="Telefone,Celular,Dt_Nascumento,Status,Dt_Cadastro,StatusSenha FROM Voluntario WHERE Login = ?)";
+        String sql = "SELECT v.Login,v.Senha,v.Nome,v.CPF,v.Profissao,v.Endereco,v.Complemento,v.Numero,v.Bairro,v.Cidade,v.UF,v.CEP,"
+                +"v.Telefone,v.Celular,v.Dt_Nascumento,v.`Status`,v.Dt_Cadastro,v.StatusSenha,a.CadVolun,a.AltVolun,a.CadFami,a.AltFami,"
+                +"a.CadMora,a.AltMora,a.GerRel,a.AltParan,a.GerenUser,a.CadDoa,a.AltDoa,a.ExcDoa,a.CadAux,a.AltAux,a.ExcAux FROM Voluntario as v\n"
+                +"INNER JOIN Acessos AS a ON a.login = v.login WHERE v.Login = ?";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -226,6 +245,22 @@ public class DAOVoluntario implements InterfaceVoluntario{
             retorno.setStatus(rs.getString("Status"));
             retorno.setDt_Cadastro(rs.getString("Dt_Cadastro"));
             retorno.setStatusSenha(rs.getInt("StatusSenha"));
+            retorno.getAcessoUsuario().setCadVolun(rs.getString("CadVolun"));
+            retorno.getAcessoUsuario().setAltVolun(rs.getString("AltVolun"));
+            retorno.getAcessoUsuario().setCadFami(rs.getString("CadFami"));
+            retorno.getAcessoUsuario().setAltFami(rs.getString("AltFami"));
+            retorno.getAcessoUsuario().setCadMora(rs.getString("CadMora"));
+            retorno.getAcessoUsuario().setAltMora(rs.getString("AltMora"));
+            retorno.getAcessoUsuario().setGerRel(rs.getString("GerRel"));
+            retorno.getAcessoUsuario().setAltParan(rs.getString("AltParan"));
+            retorno.getAcessoUsuario().setGerenUser(rs.getString("GerenUser"));
+            retorno.getAcessoUsuario().setCadDoa(rs.getString("CadDoa"));
+            retorno.getAcessoUsuario().setAltDoa(rs.getString("AltDoa"));
+            retorno.getAcessoUsuario().setExcDoa(rs.getString("ExcDoa"));
+            retorno.getAcessoUsuario().setCadAux(rs.getString("CadAux"));
+            retorno.getAcessoUsuario().setAltAux(rs.getString("AltAux"));
+            retorno.getAcessoUsuario().setExcAux(rs.getString("ExcAux"));
+            
         }
         }
         catch(SQLException ex){
@@ -242,9 +277,9 @@ public class DAOVoluntario implements InterfaceVoluntario{
     
     
     /**
-     * VERIFICAR SE EXISTE O USUARIO NO BANCO DE DADOS
+     * VERIFICAR SE EXISTE O USUARIO NO BANCO DE DADOS E TRAZ AS PERMISSÕES
      * @param voluntario OBJETO COM O USUARIO A SER PROCURADO
-     * @return RETORNA TRUE SE O VOLUNTARIO EXISTIR
+     * @return RETORNA O VOLUNTARIO E MANDA PARA O FRAME PRINCIPAL AO QUAL SERA USADO PARA IDENTIFICA AS PERMISSÕES NO SISTEMA
      * @throws DAOException
      * @throws SQLException 
      */
@@ -256,7 +291,8 @@ public class DAOVoluntario implements InterfaceVoluntario{
         
         Connection con = Conexao.getInstance().getConnection();
         
-        String sql = "SELECT Login,Senha,Status FROM Voluntario WHERE Login = ? and Senha = ?";
+        String sql = "SELECT v.Login,v.Senha,v.`Status`,v.StatusSenha,a.CadVolun,a.AltVolun,a.CadFami,a.AltFami,a.CadMora,a.AltMora,a.GerRel,a.AltParan,a.GerenUser,a.CadDoa,"
+                +"a.AltDoa,a.ExcDoa,a.CadAux,a.AltAux,a.ExcAux FROM Voluntario AS v INNER JOIN Acessos AS a ON a.login = v.login WHERE v.Login = ? AND v.Senha = ?";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -271,6 +307,22 @@ public class DAOVoluntario implements InterfaceVoluntario{
             retorno.setLogin(rs.getString("Login"));
             retorno.setSenha(rs.getString("Senha"));
             retorno.setStatus(rs.getString("Status"));
+            retorno.setStatusSenha(rs.getInt("StatusSenha"));
+            retorno.getAcessoUsuario().setCadVolun(rs.getString("CadVolun"));
+            retorno.getAcessoUsuario().setAltVolun(rs.getString("AltVolun"));
+            retorno.getAcessoUsuario().setCadFami(rs.getString("CadFami"));
+            retorno.getAcessoUsuario().setAltFami(rs.getString("AltFami"));
+            retorno.getAcessoUsuario().setCadMora(rs.getString("CadMora"));
+            retorno.getAcessoUsuario().setAltMora(rs.getString("AltMora"));
+            retorno.getAcessoUsuario().setGerRel(rs.getString("GerRel"));
+            retorno.getAcessoUsuario().setAltParan(rs.getString("AltParan"));
+            retorno.getAcessoUsuario().setGerenUser(rs.getString("GerenUser"));
+            retorno.getAcessoUsuario().setCadDoa(rs.getString("CadDoa"));
+            retorno.getAcessoUsuario().setAltDoa(rs.getString("AltDoa"));
+            retorno.getAcessoUsuario().setExcDoa(rs.getString("ExcDoa"));
+            retorno.getAcessoUsuario().setCadAux(rs.getString("CadAux"));
+            retorno.getAcessoUsuario().setAltAux(rs.getString("AltAux"));
+            retorno.getAcessoUsuario().setExcAux(rs.getString("ExcAux"));
         }
         }
         catch(SQLException ex){
@@ -285,8 +337,59 @@ public class DAOVoluntario implements InterfaceVoluntario{
         
         
     }
-    
-    
-    
-    
+
+    @Override
+    public boolean AtualizarAcessos(Voluntario voluntario) throws DAOException, SQLException {
+      
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "UPDATE Voluntario SET `Status` = ?,StatusSenha = ? WHERE Login = ? ";
+        
+        String sql2 = "UPDATE Acessos SET CadVolun = ?,AltVolun = ?,CadFami = ?,AltFami = ?,CadMora = ?,AltMora = ?,GerRel = ?,AltParan = ?,GerenUser = ?,"
+                + "CadDoa = ?,AltDoa = ?,ExcDoa = ?,CadAux = ?, AltAux = ?, ExcAux = ? WHERE Login = ?";
+        
+        
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1,voluntario.getStatus());
+        pstm.setInt(2,voluntario.getStatusSenha());
+        pstm.setString(3,voluntario.getLogin());
+        
+        PreparedStatement pstm2;
+        pstm2 = con.prepareStatement(sql2);
+        pstm2.setString(1,voluntario.getAcessoUsuario().getCadVolun());
+        pstm2.setString(2,voluntario.getAcessoUsuario().getAltVolun());
+        pstm2.setString(3,voluntario.getAcessoUsuario().getCadFami());
+        pstm2.setString(4,voluntario.getAcessoUsuario().getAltFami());
+        pstm2.setString(5,voluntario.getAcessoUsuario().getCadMora());
+        pstm2.setString(6,voluntario.getAcessoUsuario().getAltMora());
+        pstm2.setString(7,voluntario.getAcessoUsuario().getGerRel());
+        pstm2.setString(8,voluntario.getAcessoUsuario().getAltParan());
+        pstm2.setString(9,voluntario.getAcessoUsuario().getGerenUser());
+        pstm2.setString(10,voluntario.getAcessoUsuario().getCadDoa());
+        pstm2.setString(11,voluntario.getAcessoUsuario().getAltDoa());
+        pstm2.setString(12,voluntario.getAcessoUsuario().getExcDoa());
+        pstm2.setString(13,voluntario.getAcessoUsuario().getCadAux());
+        pstm2.setString(14,voluntario.getAcessoUsuario().getAltAux());
+        pstm2.setString(15,voluntario.getAcessoUsuario().getExcAux());
+        
+        pstm2.setString(16,voluntario.getLogin());
+            
+        try{
+         
+        pstm.executeUpdate();
+        pstm2.executeUpdate();
+            
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+           Conexao.closeConnection(con, pstm); 
+        }
+        return true;
+        
+         
+}
 }

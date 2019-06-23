@@ -8,15 +8,12 @@ package gas.telas;
 
 import com.sun.glass.events.KeyEvent;
 import gas.basicas.Doacao;
+import gas.basicas.Voluntario;
 import gas.regra.RNDoacao;
 import gas.util.CustomDocument;
 import gas.util.DAOException;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,12 +24,17 @@ import javax.swing.table.DefaultTableModel;
 public class CadDoacao extends javax.swing.JInternalFrame {
 
     private RNDoacao rnDoacao;
-    /** Creates new form CadAuxilio */
-    public CadDoacao() {
+    private Voluntario voluntario;
+    
+    /** Creates new form CadDoacao */
+    public CadDoacao(Voluntario x) {
         initComponents();
         rnDoacao = new RNDoacao();
+        this.voluntario = x;
         txtDescricao.setDocument(new CustomDocument());
         lista();
+        txtDescricao.grabFocus();
+        
     }
 
     /** This method is called from within the constructor to
@@ -72,7 +74,7 @@ public class CadDoacao extends javax.swing.JInternalFrame {
                 java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -119,6 +121,7 @@ public class CadDoacao extends javax.swing.JInternalFrame {
         });
 
         btnSair.setText("Sair");
+        btnSair.setFocusable(false);
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
@@ -179,9 +182,10 @@ public class CadDoacao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    
+        if(this.voluntario.getAcessoUsuario().getCadDoa().equalsIgnoreCase("S")){
         
-        
-        Doacao doacao = new Doacao();
+            Doacao doacao = new Doacao();
         
         doacao.setDescricao(txtDescricao.getText());
        
@@ -190,9 +194,17 @@ public class CadDoacao extends javax.swing.JInternalFrame {
             rnDoacao.inserir(doacao);
             txtDescricao.setText("");
             lista();
+            txtDescricao.grabFocus();
         } catch (DAOException | SQLException ex) {
             
         }
+        
+            
+        }else{
+            JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
         
    
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -213,13 +225,14 @@ public class CadDoacao extends javax.swing.JInternalFrame {
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             btnCadastrar.doClick();
             
+            
         }
         
         
     }//GEN-LAST:event_btnCadastrarKeyPressed
 
     private void tbDoacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDoacaoMouseClicked
-  
+        
     }//GEN-LAST:event_tbDoacaoMouseClicked
 
     private void tbDoacaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDoacaoKeyPressed
@@ -234,11 +247,50 @@ public class CadDoacao extends javax.swing.JInternalFrame {
                         doacaoEx.setNr_Doacao(Integer.parseInt(tbDoacao.getValueAt(linha,0).toString()));
                         
               try {
-                   int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir esta doação?","Excluir Doação",JOptionPane.YES_NO_CANCEL_OPTION);
+                   int confirma = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja excluir esta doação?","Excluir Doação",JOptionPane.YES_NO_CANCEL_OPTION);
                 if(confirma == JOptionPane.YES_OPTION){
-                 rnDoacao.excluir(doacaoEx);
-                 JOptionPane.showMessageDialog(null,"Excluido com Sucesso!","",JOptionPane.INFORMATION_MESSAGE);
-                 lista();
+                 
+                    if(this.voluntario.getAcessoUsuario().getExcDoa().equalsIgnoreCase("S")){
+                     
+                        rnDoacao.excluir(doacaoEx);
+                        JOptionPane.showMessageDialog(this,"Excluido com Sucesso!","",JOptionPane.INFORMATION_MESSAGE);
+                        lista();
+
+                    }else{
+                        JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                }
+                  
+              } catch (DAOException | SQLException ex) {
+                 
+              }
+
+          
+        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER ){ // Alterar Doação     
+            
+            Doacao doacaoAlt = new Doacao();
+            
+                int linha;
+   
+                        linha = tbDoacao.getSelectedRow();
+                        doacaoAlt.setNr_Doacao(Integer.parseInt(tbDoacao.getValueAt(linha,0).toString()));
+                        doacaoAlt.setDescricao(tbDoacao.getValueAt(linha, 1).toString());
+                        
+              try {
+                   int confirma = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja alterar a descrição desta doação?","Alterar Doação",JOptionPane.YES_NO_CANCEL_OPTION);
+                if(confirma == JOptionPane.YES_OPTION){
+                 
+                    if(this.voluntario.getAcessoUsuario().getAltDoa().equalsIgnoreCase("S")){
+                     
+                        rnDoacao.alterar(doacaoAlt);
+                        JOptionPane.showMessageDialog(this,"Alterado com Sucesso!","",JOptionPane.INFORMATION_MESSAGE);
+                        lista();
+
+                    }else{
+                        JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
+                    }
+                    
                 }
                   
               } catch (DAOException | SQLException ex) {
@@ -247,10 +299,6 @@ public class CadDoacao extends javax.swing.JInternalFrame {
 
           
         }
-        
-        
-        
-        
         
     }//GEN-LAST:event_tbDoacaoKeyPressed
 

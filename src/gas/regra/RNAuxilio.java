@@ -35,6 +35,9 @@ public class RNAuxilio implements InterfaceAuxilio{
             throw new DAOException("Error máximo de caracteres atingido: 35",1);
         }
         
+        if(auxilio.getDescricao().trim().isEmpty() || auxilio.getDescricao().equalsIgnoreCase("")){
+            throw new DAOException("Descrição em Branco.",1);
+        }
         
         dao.inserir(auxilio);
         
@@ -42,17 +45,40 @@ public class RNAuxilio implements InterfaceAuxilio{
 
     @Override
     public void excluir(Auxilio auxilio) throws DAOException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(auxilio.getNr_Aux() == 0){
+            throw new DAOException("Auxílio não selecionado",1);
+        }
+        
+        if(pesquisarMov(auxilio)){
+            throw new DAOException("Não é possivel excluir Auxílio com movimentação",1);
+        }else{
+            dao.excluir(auxilio);
+        }
+        
+        
+        
     }
 
     @Override
     public ArrayList<Auxilio> listarAuxilio() throws DAOException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dao.listarAuxilio();
     }
 
     @Override
     public Auxilio pesquisar(Auxilio auxilio) throws DAOException, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void alterar(Auxilio auxilio) throws DAOException, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean pesquisarMov(Auxilio auxilio) throws DAOException, SQLException {
+        
+        return dao.pesquisarMov(auxilio);
     }
     
 }

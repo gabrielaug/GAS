@@ -79,5 +79,11 @@ public class RNDoacao implements InterfaceDoacao{
         
         return dao.pesquisarMov(doacao);
     }
+
+    @Override
+    public void alterar(Doacao doacao) throws DAOException, SQLException {
+
+        dao.alterar(doacao);
+    }
     
 }

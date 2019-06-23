@@ -155,6 +155,65 @@ public class DAOAuxilio implements InterfaceAuxilio{
         
         
     }
+
+    @Override
+    public void alterar(Auxilio auxilio) throws DAOException, SQLException {
+        
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "UPDATE Auxilio SET Descricao = ? WHERE Nr_Aux = ?";
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1,auxilio.getDescricao());
+        pstm.setInt(2, auxilio.getNr_Aux());
+        
+        try{
+         
+        pstm.executeUpdate();
+            
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+           Conexao.closeConnection(con, pstm); 
+        }
+        
+    }
+
+    @Override
+    public boolean pesquisarMov(Auxilio auxilio) throws DAOException, SQLException {
+        
+        boolean retorno = false;
+        
+        
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "SELECT Nr_Aux FROM Aux_Familia WHERE Nr_Aux = ?";
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setInt(1, auxilio.getNr_Aux());
+        ResultSet rs = null;
+        
+        try{
+        rs = pstm.executeQuery();
+        
+        if(rs.next()){
+            retorno = true;
+            
+        }
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+            Conexao.closeConnection(con, pstm, rs);
+        }
+        return retorno;
+        
+    }
     
     
     

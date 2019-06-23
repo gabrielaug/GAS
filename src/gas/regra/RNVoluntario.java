@@ -47,12 +47,17 @@ public class RNVoluntario implements InterfaceVoluntario{
 
     @Override
     public ArrayList<Voluntario> listarVoluntario() throws DAOException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        return dao.listarVoluntario();
     }
 
     @Override
     public Voluntario pesquisar(Voluntario voluntario) throws DAOException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
+        return dao.pesquisar(voluntario);
     }
 
     @Override
@@ -72,6 +77,14 @@ public class RNVoluntario implements InterfaceVoluntario{
           throw new DAOException("Usuário Inativo, Entre em Contato com o Administrador.",1);
       }   
        return retorno; 
+    }
+
+    @Override
+    public boolean AtualizarAcessos(Voluntario voluntario) throws DAOException, SQLException {
+        
+        
+        
+        return dao.AtualizarAcessos(voluntario);
     }
     
 }

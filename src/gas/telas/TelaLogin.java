@@ -13,8 +13,6 @@ import gas.util.CustomDocument;
 import gas.util.DAOException;
 import gas.util.MD5;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Gabriel Augusto

@@ -30,6 +30,15 @@ public class Voluntario{
     private Date dt_Nascimento;
     private String status;
     private String dt_Cadastro;
+    private AcessoUsuario acessoUsuario = new AcessoUsuario();
+
+    public AcessoUsuario getAcessoUsuario() {
+        return acessoUsuario;
+    }
+
+    public void setAcessoUsuario(AcessoUsuario acessoUsuario) {
+        this.acessoUsuario = acessoUsuario;
+    }
 
     public int getStatusSenha() {
         return statusSenha;

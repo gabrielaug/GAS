@@ -42,7 +42,7 @@ public class DAOAcessoUsuario implements InterfaceAcessoUsuario{
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
-        pstm.setString(1,aU.getVoluntario().getLogin());
+//        pstm.setString(1,aU.getVoluntario().getLogin());
         pstm.setString(2,aU.getCadVolun());
         pstm.setString(3,aU.getAltVolun());
         pstm.setString(4,aU.getCadFami());

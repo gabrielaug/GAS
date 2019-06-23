@@ -8,7 +8,6 @@ package gas.interfaces;
 import gas.basicas.AcessoUsuario;
 import gas.util.DAOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *
