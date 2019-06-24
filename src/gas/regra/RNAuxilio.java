@@ -72,7 +72,7 @@ public class RNAuxilio implements InterfaceAuxilio{
 
     @Override
     public void alterar(Auxilio auxilio) throws DAOException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.alterar(auxilio);
     }
 
     @Override

@@ -70,8 +70,7 @@ public class ParanGeral extends javax.swing.JInternalFrame {
                 {"Licença", null},
                 {"Iniciar maximizado", null},
                 {"Atualizar permissão do usuáriologo após alterar?", null},
-                {"Solicitar alteração de senha no primeiro acesso?", null},
-                {null, null}
+                {"Solicitar alteração de senha no primeiro acesso?", null}
             },
             new String [] {
                 "Parametro", "Opção"

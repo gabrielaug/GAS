@@ -26,7 +26,8 @@ public class CadDoacao extends javax.swing.JInternalFrame {
     private RNDoacao rnDoacao;
     private Voluntario voluntario;
     
-    /** Creates new form CadDoacao */
+    /** Creates new form CadDoacao
+     * @param x */
     public CadDoacao(Voluntario x) {
         initComponents();
         rnDoacao = new RNDoacao();
