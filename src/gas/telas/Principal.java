@@ -5,7 +5,11 @@
  */
 package gas.telas;
 
+import gas.basicas.Parametros;
 import gas.basicas.Voluntario;
+import gas.dados.DAOParametros;
+import gas.util.DAOException;
+import java.sql.SQLException;
 
 
 /**
@@ -15,12 +19,14 @@ import gas.basicas.Voluntario;
 public class Principal extends javax.swing.JFrame {
 
     private Voluntario voluntario;
+    private Parametros parametros;
+    private DAOParametros daoParam;
     
     /**
      * Creates new form Principal
      */
-    public Principal() {
-        System.exit(0);
+    public Principal() { 
+        System.exit(0); // COMANDO DE PROTEÇÃO  CASO NÃO ABRA PELO LOGIN
         initComponents();
     }
      
@@ -28,8 +34,20 @@ public class Principal extends javax.swing.JFrame {
     public Principal(Voluntario voluntario){
         initComponents();
         this.voluntario = voluntario;
+        daoParam = new DAOParametros();
+        try {
+            this.parametros = daoParam.buscarParametros();
+        } catch (DAOException | SQLException ex) {
+            
+        }
         acessos();
+        configParam();
     }
+    
+    
+    
+    
+    
     
     
     /**
@@ -45,11 +63,15 @@ public class Principal extends javax.swing.JFrame {
         if(voluntario.getAcessoUsuario().getAltParan().equalsIgnoreCase("N")){
             this.menuParamGeral.setEnabled(false);
             
-        }
-        
+        } 
     }
     
-    
+     private void configParam(){
+            
+         if(this.parametros.getSysMaximizado().equalsIgnoreCase("S")){
+             this.setExtendedState(MAXIMIZED_BOTH);
+         }
+        }
     
     
     
@@ -123,6 +145,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3.setText("Morador");
         jMenu1.add(jMenuItem3);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem5.setText("Auxílio");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public interface InterfaceParametros {
     
-    public void inserir(Parametros parametros) throws DAOException, SQLException;
     public void alterar(Parametros parametros) throws DAOException, SQLException;
+    public Parametros buscarParametros() throws DAOException, SQLException;
     
 }

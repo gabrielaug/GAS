@@ -11,10 +11,24 @@ package gas.basicas;
  */
 public class Parametros {
     
+    private final int parametro = 1;
+    private String licenca;
     private String sysMaximizado;
     private String atuPermUsuOn;
     private String altSenhaPrimeiAcesso;
 
+    public String getLicenca() {
+        return licenca;
+    }
+
+    public void setLicenca(String licenca) {
+        this.licenca = licenca;
+    }
+
+    public int getParametro() {
+        return parametro;
+    }
+    
     public String getSysMaximizado() {
         return sysMaximizado;
     }

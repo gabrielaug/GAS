@@ -5,6 +5,7 @@
  */
 package gas.telas;
 
+import gas.basicas.Parametros;
 import gas.basicas.Voluntario;
 import gas.regra.RNVoluntario;
 import gas.util.CustomDocument;
@@ -35,27 +36,15 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
     /**
      * CONSTRUTOR USADO PARA ALTERAR PERMISSÕES LOGO APÓS O CADASTRO
      * @param x 
+     * @param y 
      */
-    public ParanUsuario(Voluntario x) {
+    public ParanUsuario(Voluntario x,Parametros y) {
         initComponents();
         voluntario = x;
         rnVoluntario = new RNVoluntario();
         txtLogin.setDocument(new CustomDocument());
     }
-    
-    /**
-     * RETORNO DA PESQUISA DE USUÁRIO, PREENCHIMENTO DOS CAMPOS
-     */
-    public void retornoPesquisa(Voluntario x){
-        
-        
-        
-        
-    }
-    
-    
-    
-    
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -773,6 +762,7 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
         
         try {
             if(rnVoluntario.AtualizarAcessos(voluntario)){
+               
                 JOptionPane.showMessageDialog(this,"Gravado !","Sucesso",JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (DAOException | SQLException ex) {
@@ -780,6 +770,11 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnGravarActionPerformed
 
+    
+    
+    
+    
+    
     private void btnPesqKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPesqKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
          btnPesq.doClick();

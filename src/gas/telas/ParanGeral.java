@@ -5,7 +5,12 @@
  */
 package gas.telas;
 
+import gas.basicas.Parametros;
+import gas.dados.DAOParametros;
+import gas.util.DAOException;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +23,7 @@ public class ParanGeral extends javax.swing.JInternalFrame {
      */
     public ParanGeral() {
         initComponents();
+        lista();
         
     }
     
@@ -25,6 +31,94 @@ public class ParanGeral extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Responda com Sim ou Não","Aviso",JOptionPane.WARNING_MESSAGE);
     }
 
+    
+    public void lista(){
+        DAOParametros dao = new DAOParametros(); //CRIAR A INSTANCIA DA FACHADA
+        DefaultTableModel modelo = new DefaultTableModel(); // INSTANCIA O OBJETO PADRÃO DE TABELA - ADICIONE A IMPORTAÇÃO
+        Parametros parametros = new Parametros(); // CRIA UMA LISTA, DE ARRAYLIST DE LIVRO
+        try {
+            parametros =  modo(dao.buscarParametros(),"Leitura"); // BUSCA OS DADOS DO BANCO PARA A LISTA
+        } catch (Exception ex) {
+            
+        } 
+        
+       modelo = (DefaultTableModel) tbParam.getModel(); // CHECA O JTABLE PARA RECEBER OS DADOS
+       modelo.setValueAt(parametros.getLicenca(), 0, 1);
+       modelo.setValueAt(parametros.getSysMaximizado(), 1, 1);
+       modelo.setValueAt(parametros.getAtuPermUsuOn(), 2, 1);
+       modelo.setValueAt(parametros.getAltSenhaPrimeiAcesso(), 3, 1);
+    }
+    
+    
+    private Parametros modo(Parametros parametros,String modo){
+      
+        if(modo.equalsIgnoreCase("Leitura")){
+            
+        if(parametros.getSysMaximizado().equalsIgnoreCase("S")){
+            parametros.setSysMaximizado("Sim");
+        }else{
+            parametros.setSysMaximizado("Não");
+        }
+        
+        if(parametros.getAtuPermUsuOn().equalsIgnoreCase("S")){
+            parametros.setAtuPermUsuOn("Sim");
+        }else{
+            parametros.setAtuPermUsuOn("Não");
+        }
+        
+        if(parametros.getAltSenhaPrimeiAcesso().equalsIgnoreCase("S")){
+            parametros.setAltSenhaPrimeiAcesso("Sim");
+        }else{
+            parametros.setAltSenhaPrimeiAcesso("Não");
+        }
+        
+        return parametros;
+        }
+        
+        
+        if(modo.equalsIgnoreCase("Banco")){
+            
+        if(parametros.getSysMaximizado().equalsIgnoreCase("Sim")){
+            parametros.setSysMaximizado("S");
+        }else{
+            parametros.setSysMaximizado("N");
+        }
+        
+        if(parametros.getAtuPermUsuOn().equalsIgnoreCase("Sim")){
+            parametros.setAtuPermUsuOn("S");
+        }else{
+            parametros.setAtuPermUsuOn("N");
+        }
+        
+        if(parametros.getAltSenhaPrimeiAcesso().equalsIgnoreCase("Sim")){
+            parametros.setAltSenhaPrimeiAcesso("S");
+        }else{
+            parametros.setAltSenhaPrimeiAcesso("N");
+        }
+
+            return parametros;
+        }
+        return parametros;
+    }
+    
+    private Parametros validar(Parametros parametros) throws DAOException{
+        
+        if(!parametros.getSysMaximizado().trim().equalsIgnoreCase("Sim")  && !parametros.getSysMaximizado().trim().equalsIgnoreCase("Não")){
+            
+            throw new DAOException("Parametro de iniciar maximizado digitado incorretamente.",1);
+        }
+        
+        if(!parametros.getAtuPermUsuOn().trim().equalsIgnoreCase("Sim") && !parametros.getAtuPermUsuOn().trim().equalsIgnoreCase("Não")){
+            throw new DAOException("Parametro de atualizar permissão do usuário digitado incorretamente.",1);
+        }
+        
+        if(!parametros.getAltSenhaPrimeiAcesso().trim().equalsIgnoreCase("Sim") && !parametros.getAltSenhaPrimeiAcesso().trim().equalsIgnoreCase("Não")){
+            throw new DAOException("Parametro de alterar senha no primeiro login digitado incorretamente.",1);
+        }
+ 
+        return parametros;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,19 +129,27 @@ public class ParanGeral extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnGravar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbParam = new javax.swing.JTable();
 
         setTitle("Parametro Geral");
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 102));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton2.setText("Gravar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGravar.setText("Gravar");
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGravarActionPerformed(evt);
+            }
+        });
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -55,21 +157,25 @@ public class ParanGeral extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbParam.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Licença", null},
                 {"Iniciar maximizado", null},
-                {"Atualizar permissão do usuáriologo após alterar?", null},
+                {"Atualizar permissão do usuário logo após alterar?", null},
                 {"Solicitar alteração de senha no primeiro acesso?", null}
             },
             new String [] {
@@ -91,11 +197,11 @@ public class ParanGeral extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
+        jScrollPane1.setViewportView(tbParam);
+        if (tbParam.getColumnModel().getColumnCount() > 0) {
+            tbParam.getColumnModel().getColumn(1).setMinWidth(80);
+            tbParam.getColumnModel().getColumn(1).setPreferredWidth(80);
+            tbParam.getColumnModel().getColumn(1).setMaxWidth(80);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,21 +222,42 @@ public class ParanGeral extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        
+        Parametros parametros = new Parametros();
+        DAOParametros dao = new DAOParametros();
+        
+        parametros.setSysMaximizado(tbParam.getValueAt(1, 1).toString());
+        parametros.setAtuPermUsuOn(tbParam.getValueAt(2, 1).toString());
+        parametros.setAltSenhaPrimeiAcesso(tbParam.getValueAt(3, 1).toString());
+
+        
+        try {
+            dao.alterar(modo(validar(parametros),"Banco"));
+            this.dispose();
+        } catch (DAOException | SQLException ex) {
+           
+        }
+        
+      
+    }//GEN-LAST:event_btnGravarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnGravar;
+    private javax.swing.JButton btnSair;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbParam;
     // End of variables declaration//GEN-END:variables
 }
