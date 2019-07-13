@@ -39,9 +39,9 @@ public class ParanGeral extends javax.swing.JInternalFrame {
         try {
             parametros =  modo(dao.buscarParametros(),"Leitura"); // BUSCA OS DADOS DO BANCO PARA A LISTA
         } catch (Exception ex) {
-            
-        } 
-        
+               
+                }
+       
        modelo = (DefaultTableModel) tbParam.getModel(); // CHECA O JTABLE PARA RECEBER OS DADOS
        modelo.setValueAt(parametros.getLicenca(), 0, 1);
        modelo.setValueAt(parametros.getSysMaximizado(), 1, 1);

@@ -11,7 +11,10 @@ import gas.regra.RNVoluntario;
 import gas.util.CustomDocument;
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -93,6 +96,12 @@ public class PesqUsuario extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
+
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
+            }
+        });
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gas/util/imagens/miniGAS.png"))); // NOI18N
 
@@ -211,6 +220,25 @@ public class PesqUsuario extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_tbPesqKeyPressed
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        
+        TableRowSorter sorter = null;  
+    DefaultTableModel model = (DefaultTableModel) tbPesq.getModel();  
+     sorter = new TableRowSorter<TableModel>(model); 
+    tbPesq.setRowSorter(sorter); 
+        
+        String nome = txtNome.getText();
+        if(nome.length() == 0 ){
+            sorter.setRowFilter(null);
+        }else{
+            sorter.setRowFilter(RowFilter.regexFilter(nome,1));
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_txtNomeKeyPressed
 
     /**
      * @param args the command line arguments

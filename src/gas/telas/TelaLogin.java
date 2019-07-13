@@ -64,6 +64,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 txtLoginActionPerformed(evt);
             }
         });
+        txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLoginKeyTyped(evt);
+            }
+        });
 
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -210,6 +215,13 @@ public class TelaLogin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnEntrarKeyPressed
+
+    private void txtLoginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginKeyTyped
+        String carac = ",.-=\\|+*%&#@!'_)($/¨;:";
+        if(carac.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLoginKeyTyped
 
     /**
      * @param args the command line arguments

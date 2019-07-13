@@ -20,21 +20,20 @@ public class Morador {
     private String org_Emissor;
     private String ufEmissor;
     private String profissao;
-    private String telefone;
     private String celular;
     private double renda;
     private String deficiente;
     private String observacao;
-    private Date dt_Nascimento;
+    private String dt_Nascimento;
     private Date dt_Cadastro;
     private Familia familia;
     private String representante;
     
-    public Date getDt_Nascimento() {
+    public String getDt_Nascimento() {
         return dt_Nascimento;
     }
 
-    public void setDt_Nascimento(Date dt_Nascimento) {
+    public void setDt_Nascimento(String dt_Nascimento) {
         this.dt_Nascimento = dt_Nascimento;
     }
     
@@ -101,14 +100,6 @@ public class Morador {
 
     public void setProfissao(String profissao) {
         this.profissao = profissao;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getCelular() {

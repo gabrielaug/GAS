@@ -126,6 +126,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastro");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem1.setText("Família");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,7 +274,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CadFamilia cadFamilia = new CadFamilia();
+        CadFamilia cadFamilia = new CadFamilia(this.voluntario);
          this.jDesktop.add(cadFamilia);
          cadFamilia.setVisible(true);
          

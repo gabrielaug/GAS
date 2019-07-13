@@ -6,6 +6,13 @@
 package gas.telas;
 
 import com.sun.glass.events.KeyEvent;
+import gas.basicas.Familia;
+import gas.basicas.Morador;
+import gas.basicas.Voluntario;
+import gas.util.CustomDocument;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +20,22 @@ import com.sun.glass.events.KeyEvent;
  */
 public class CadFamilia extends javax.swing.JInternalFrame {
 
+    private Voluntario voluntario;
+    private Familia familia;
+    
     /**
      * Creates new form CadFamilia
      */
     public CadFamilia() {
         initComponents();
+    }
+    
+    public CadFamilia(Voluntario x){
+        initComponents();
+        this.voluntario = x;
+        this.familia = new Familia();
+        caixaAlta();
+        
     }
 
     /**
@@ -32,60 +50,60 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jDialog1 = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtRegistro = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCep = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtEndereco = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtBairro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtCidade = new javax.swing.JTextField();
+        cboxUf = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtComplemento = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtRendaFamiliar = new javax.swing.JTextField();
+        btnPesq = new javax.swing.JButton();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        txtCpf = new javax.swing.JFormattedTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtRG = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        txtOE = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        cboxUfEmissor = new javax.swing.JComboBox<>();
+        txtDtNascimento = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
         jLabel16 = new javax.swing.JLabel();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
-        jTextField12 = new javax.swing.JTextField();
+        txtCelular = new javax.swing.JFormattedTextField();
+        txtRenda = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        textArea1 = new java.awt.TextArea();
+        txtObs = new java.awt.TextArea();
         jLabel21 = new javax.swing.JLabel();
+        chkRepresentante = new javax.swing.JCheckBox();
         chkDeficiente = new javax.swing.JCheckBox();
-        chkDeficiente1 = new javax.swing.JCheckBox();
         jLabel23 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnAlterarMorador = new javax.swing.JButton();
         btnIncluirMorador = new javax.swing.JButton();
         btnLimparMorador = new javax.swing.JButton();
-        btnExcluirMorador = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         btnSair = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbMorador = new javax.swing.JTable();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -99,21 +117,35 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         );
 
         setTitle("Cadastro de Família");
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Registro:");
 
-        jTextField1.setEditable(false);
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtRegistro.setEditable(false);
+        txtRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
+                txtRegistroKeyPressed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("CEP:");
+
+        txtCep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCepKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Endereço:");
@@ -127,7 +159,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Cidade:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PE", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cboxUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PE", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("UF:");
@@ -137,6 +169,38 @@ public class CadFamilia extends javax.swing.JInternalFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Renda Famíliar:");
+
+        txtRendaFamiliar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRendaFamiliarKeyTyped(evt);
+            }
+        });
+
+        btnPesq.setText("...");
+        btnPesq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesqActionPerformed(evt);
+            }
+        });
+        btnPesq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnPesqKeyPressed(evt);
+            }
+        });
+
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyPressed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel15.setText("Telefone:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,36 +219,42 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4))
-                                    .addComponent(jTextField5))
+                                    .addComponent(txtBairro))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel17)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cboxUf, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField3)))
-                            .addComponent(jTextField7)))
+                                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtEndereco)))
+                            .addComponent(txtComplemento)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPesq))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtRendaFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -193,31 +263,35 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesq))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboxUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRendaFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -225,127 +299,182 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jLabel1.setText("Dados da Família:");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("Morador Representante:");
+        jLabel10.setText("Morador:");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Nome:");
 
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
+            }
+        });
+
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("CPF:");
 
         try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCpfKeyPressed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("RG:");
 
+        txtRG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRGKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRGKeyTyped(evt);
+            }
+        });
+
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Orgão Emissor:");
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        txtOE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                txtOEActionPerformed(evt);
+            }
+        });
+        txtOE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtOEKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtOEKeyTyped(evt);
             }
         });
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("UF:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PE", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cboxUfEmissor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PE", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cboxUfEmissor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cboxUfEmissorKeyPressed(evt);
+            }
+        });
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtDtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtDtNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDtNascimentoKeyPressed(evt);
+            }
+        });
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("Data de Nascimento:");
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel15.setText("Telefone:");
-
-        try {
-            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Celular:");
 
         try {
-            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+            txtCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCelularKeyPressed(evt);
+            }
+        });
+
+        txtRenda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRendaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRendaKeyTyped(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setText("Renda:");
 
+        txtObs.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("Observação:");
 
-        chkDeficiente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        chkDeficiente.setText("Representante");
+        chkRepresentante.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chkRepresentante.setText("Representante");
+        chkRepresentante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                chkRepresentanteKeyPressed(evt);
+            }
+        });
 
-        chkDeficiente1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        chkDeficiente1.setText("Deficiente?");
+        chkDeficiente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chkDeficiente.setText("Deficiente");
+        chkDeficiente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                chkDeficienteKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel21)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtObs, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtOE, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboxUfEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRenda, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkDeficiente)
+                        .addComponent(chkRepresentante)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkDeficiente1)
-                        .addGap(13, 13, 13))
-                    .addComponent(textArea1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(chkDeficiente)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -354,33 +483,31 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboxUfEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkDeficiente)
-                    .addComponent(chkDeficiente1))
-                .addGap(11, 11, 11)
+                    .addComponent(txtRenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkRepresentante)
+                    .addComponent(chkDeficiente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel21)
-                    .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtObs, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -390,17 +517,28 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnAlterarMorador.setText("Alterar Morador");
+        btnAlterarMorador.setFocusable(false);
+        btnAlterarMorador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarMoradorActionPerformed(evt);
+            }
+        });
 
         btnIncluirMorador.setText("Incluir Morador");
+        btnIncluirMorador.setFocusable(false);
+        btnIncluirMorador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirMoradorActionPerformed(evt);
+            }
+        });
 
         btnLimparMorador.setText("Limpar Morador");
+        btnLimparMorador.setFocusable(false);
         btnLimparMorador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparMoradorActionPerformed(evt);
             }
         });
-
-        btnExcluirMorador.setText("Excluir Morador");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -411,8 +549,6 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAlterarMorador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExcluirMorador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimparMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -421,8 +557,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnAlterarMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnIncluirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnLimparMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnExcluirMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnLimparMorador, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel5.setBackground(new java.awt.Color(0, 51, 102));
@@ -467,12 +602,9 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbMorador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Morador", "CPF", "Rep."
@@ -493,14 +625,19 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(120);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(38);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(38);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(38);
+        tbMorador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMoradorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbMorador);
+        if (tbMorador.getColumnModel().getColumnCount() > 0) {
+            tbMorador.getColumnModel().getColumn(1).setMinWidth(120);
+            tbMorador.getColumnModel().getColumn(1).setPreferredWidth(120);
+            tbMorador.getColumnModel().getColumn(1).setMaxWidth(120);
+            tbMorador.getColumnModel().getColumn(2).setMinWidth(38);
+            tbMorador.getColumnModel().getColumn(2).setPreferredWidth(38);
+            tbMorador.getColumnModel().getColumn(2).setMaxWidth(38);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -546,29 +683,29 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void txtOEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOEActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_txtOEActionPerformed
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    private void txtRegistroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRegistroKeyPressed
         
-       if(evt.getKeyCode() == KeyEvent.VK_F2){
+       if(evt.getKeyCode() == KeyEvent.VK_F1){
            
-           PesqMorador pesqMorador = new PesqMorador(null,true);
+           PesqMorador pesqMorador = new PesqMorador(null,true,this);
            pesqMorador.setVisible(true);
        }
         
         
-    }//GEN-LAST:event_jTextField1KeyPressed
+    }//GEN-LAST:event_txtRegistroKeyPressed
 
     private void btnLimparMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMoradorActionPerformed
-       
+        limparMorador();
     }//GEN-LAST:event_btnLimparMoradorActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -579,24 +716,316 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void btnPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesqActionPerformed
+
+        PesqMorador pesqMorador = new PesqMorador(null,true,this);
+           pesqMorador.setVisible(true);
+
+    }//GEN-LAST:event_btnPesqActionPerformed
+
+    private void btnPesqKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPesqKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnPesq.doClick();
+        }
+    }//GEN-LAST:event_btnPesqKeyPressed
+
+    private void btnIncluirMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirMoradorActionPerformed
+      
+   
+   if(this.voluntario.getAcessoUsuario().getCadMora().equalsIgnoreCase("S")){
+   
+       if(txtNome.getText().trim().isEmpty() || txtNome.getText().equalsIgnoreCase("")){
+           JOptionPane.showMessageDialog(this,"Digite um nome para o morador","Error",JOptionPane.ERROR_MESSAGE);
+       }else{
+           
+       
+           Morador morador = new Morador();
+
+           morador.setNome(txtNome.getText());
+           morador.setCpf(txtCpf.getText());
+           morador.setRg(txtRG.getText());
+           morador.setOrg_Emissor(txtOE.getText());
+           morador.setUfEmissor(cboxUfEmissor.getSelectedItem().toString());
+           morador.setDt_Nascimento(txtDtNascimento.getText());
+           morador.setCelular(txtCelular.getText());
+
+           if(txtRenda.getText().trim().isEmpty() || txtRenda.getText().equalsIgnoreCase("")){
+               morador.setRenda(0);
+           }else{
+               morador.setRenda(Double.parseDouble(txtRenda.getText()));
+           }
+
+
+           if(chkRepresentante.isSelected()){
+              morador.setRepresentante("S");
+              chkRepresentante.setEnabled(false);
+              chkRepresentante.setSelected(false);
+           }else{
+               morador.setRepresentante("N");
+           }
+
+           if(chkDeficiente.isSelected()){
+              morador.setDeficiente("S");
+              chkDeficiente.setSelected(false);
+           }else{
+               morador.setDeficiente("N");
+           }
+
+           morador.setObservacao(txtObs.getText());
+
+
+           this.familia.getMorador().add(morador);
+           lista();
+           limparMorador();
+           txtNome.grabFocus();
+   
+        }
+   
+   }else{
+       JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
+   }
+   
+        
+    }//GEN-LAST:event_btnIncluirMoradorActionPerformed
+
+    private void txtRendaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRendaKeyTyped
+        String carac = "0123456789,.";
+        if(!carac.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRendaKeyTyped
+
+    private void txtRendaFamiliarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRendaFamiliarKeyTyped
+        String carac = "0123456789,.";
+        if(!carac.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRendaFamiliarKeyTyped
+
+    private void txtCepKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyTyped
+        String carac = "0123456789,.";
+        if(!carac.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCepKeyTyped
+
+    private void txtRGKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRGKeyTyped
+       String carac = "0123456789,.";
+        if(!carac.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRGKeyTyped
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           txtCpf.grabFocus();
+       }
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           txtRG.grabFocus();
+       }
+    }//GEN-LAST:event_txtCpfKeyPressed
+
+    private void txtRGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRGKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           txtOE.grabFocus();
+       }
+    }//GEN-LAST:event_txtRGKeyPressed
+
+    private void txtOEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOEKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           cboxUfEmissor.grabFocus();
+       }
+    }//GEN-LAST:event_txtOEKeyPressed
+
+    private void cboxUfEmissorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboxUfEmissorKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           txtDtNascimento.grabFocus();
+       }
+    }//GEN-LAST:event_cboxUfEmissorKeyPressed
+
+    private void txtDtNascimentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDtNascimentoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           txtCelular.grabFocus();
+       }
+    }//GEN-LAST:event_txtDtNascimentoKeyPressed
+
+    private void txtTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefoneKeyPressed
+
+    }//GEN-LAST:event_txtTelefoneKeyPressed
+
+    private void txtCelularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyPressed
+      if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           txtRenda.grabFocus();
+       }
+    }//GEN-LAST:event_txtCelularKeyPressed
+
+    private void txtRendaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRendaKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           chkRepresentante.grabFocus();
+       }
+    }//GEN-LAST:event_txtRendaKeyPressed
+
+    private void chkRepresentanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkRepresentanteKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           chkDeficiente.grabFocus();
+       }
+    }//GEN-LAST:event_chkRepresentanteKeyPressed
+
+    private void chkDeficienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkDeficienteKeyPressed
+
+    }//GEN-LAST:event_chkDeficienteKeyPressed
+
+    private void tbMoradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMoradorMouseClicked
+       
+        int linha;
+        boolean rep = false;
+        
+        linha = tbMorador.getSelectedRow();
+        
+        txtNome.setText(this.familia.getMorador().get(linha).getNome());
+        txtCpf.setText(this.familia.getMorador().get(linha).getCpf());
+        txtRG.setText(this.familia.getMorador().get(linha).getRg());
+        txtOE.setText(this.familia.getMorador().get(linha).getOrg_Emissor());
+        cboxUfEmissor.setSelectedItem(this.familia.getMorador().get(linha).getUfEmissor());
+        txtDtNascimento.setText(this.familia.getMorador().get(linha).getDt_Nascimento());
+        
+        for (Morador mo : this.familia.getMorador()){
+            if(mo.getRepresentante().equalsIgnoreCase("S")){
+                rep = true;
+            }
+        }
+        
+        
+        
+        if(this.familia.getMorador().get(linha).getRepresentante().equalsIgnoreCase("S")){
+          chkRepresentante.setEnabled(true);
+          chkRepresentante.setSelected(true);  
+        }else if(rep){
+            chkRepresentante.setEnabled(false);
+            chkRepresentante.setSelected(false); 
+        }/*else{
+          chkRepresentante.setEnabled(true);
+          chkRepresentante.setSelected(true); 
+        }*/
+        
+        
+        if(this.familia.getMorador().get(linha).getDeficiente().equalsIgnoreCase("S")){
+            chkDeficiente.setSelected(true);
+        }else{
+            chkDeficiente.setSelected(false);
+        }
+        
+        txtObs.setText(this.familia.getMorador().get(linha).getObservacao());
+        txtCelular.setText(this.familia.getMorador().get(linha).getCelular());
+        txtRenda.setText(String.valueOf(this.familia.getMorador().get(linha).getRenda()));
+        
+        
+    }//GEN-LAST:event_tbMoradorMouseClicked
+
+    private void btnAlterarMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarMoradorActionPerformed
+        
+        if(this.voluntario.getAcessoUsuario().getAltMora().equalsIgnoreCase("S")){
+            
+            Morador morador = new Morador();
+            
+            int linha = tbMorador.getSelectedRow();
+            
+            if(linha < 0){
+                
+            }else{
+                
+            
+            
+            this.familia.getMorador().get(linha).setNome(txtNome.getText());
+            this.familia.getMorador().get(linha).setCpf(txtCpf.getText());
+            this.familia.getMorador().get(linha).setRg(txtRG.getText());
+            this.familia.getMorador().get(linha).setOrg_Emissor(txtOE.getText());
+            this.familia.getMorador().get(linha).setUfEmissor(cboxUfEmissor.getSelectedItem().toString());
+            this.familia.getMorador().get(linha).setDt_Nascimento(txtDtNascimento.getText());
+            this.familia.getMorador().get(linha).setCelular(txtCelular.getText());
+            this.familia.getMorador().get(linha).setRenda(Double.parseDouble(txtRenda.getText()));
+            if(chkRepresentante.isSelected()){
+               this.familia.getMorador().get(linha).setRepresentante("S");
+                chkRepresentante.setEnabled(false);
+                chkRepresentante.setSelected(false); 
+            }else{
+               this.familia.getMorador().get(linha).setRepresentante("N"); 
+            }
+            
+            if(chkDeficiente.isSelected()){
+               this.familia.getMorador().get(linha).setDeficiente("S"); 
+            }else{
+               this.familia.getMorador().get(linha).setDeficiente("N"); 
+            }
+            
+            lista();
+            limparMorador();
+            
+            }
+        }else{
+          JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);  
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnAlterarMoradorActionPerformed
+
+    private void txtOEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOEKeyTyped
+        String carac = "0123456789,.-=\\|+*%&#@!'_)($/¨;:";
+        if(carac.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtOEKeyTyped
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+          
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyReleased
+
+    
+    private void lista(){
+        //RNFamilia rnFamilia = new RNFamilia(); //CRIAR A INSTANCIA DA FACHADA
+        DefaultTableModel modelo = new DefaultTableModel(); 
+        ArrayList<Morador> lista = new ArrayList(); 
+        try {
+            lista =  familia.getMorador(); 
+        } catch (Exception ex) {
+            
+        }   
+       modelo = (DefaultTableModel) tbMorador.getModel(); // CHECA O JTABLE PARA RECEBER OS DADOS
+       if(modelo.getRowCount() > 0){  //se existir linha 
+            modelo.setRowCount(0); // apaga todas as linhas
+        }
+        for (Morador morad : lista) { 
+            modelo.addRow(new Object[]{morad.getNome(),
+                                       morad.getCpf(),
+                                       morad.getRepresentante()
+                                       
+            });
+        } // TRAS AS INFORMAÇÕES NA TABELA COM OS DADOS SOLICITADOS.
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarMorador;
-    private javax.swing.JButton btnExcluirMorador;
     private javax.swing.JButton btnIncluirMorador;
     private javax.swing.JButton btnLimparMorador;
+    private javax.swing.JButton btnPesq;
     private javax.swing.JButton btnSair;
+    private javax.swing.JComboBox<String> cboxUf;
+    private javax.swing.JComboBox<String> cboxUfEmissor;
     private javax.swing.JCheckBox chkDeficiente;
-    private javax.swing.JCheckBox chkDeficiente1;
+    private javax.swing.JCheckBox chkRepresentante;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -624,19 +1053,52 @@ public class CadFamilia extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private java.awt.TextArea textArea1;
+    private javax.swing.JTable tbMorador;
+    private javax.swing.JTextField txtBairro;
+    private javax.swing.JFormattedTextField txtCelular;
+    private javax.swing.JTextField txtCep;
+    private javax.swing.JTextField txtCidade;
+    private javax.swing.JTextField txtComplemento;
+    private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JFormattedTextField txtDtNascimento;
+    private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNumero;
+    private javax.swing.JTextField txtOE;
+    private java.awt.TextArea txtObs;
+    private javax.swing.JTextField txtRG;
+    private javax.swing.JTextField txtRegistro;
+    private javax.swing.JTextField txtRenda;
+    private javax.swing.JTextField txtRendaFamiliar;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+
+private void limparMorador(){
+   txtNome.setText("");
+   txtCpf.setText("");
+   txtOE.setText("");
+   txtDtNascimento.setText("");
+   txtObs.setText("");
+   txtRG.setText("");
+   txtRenda.setText("");
+   txtTelefone.setText("");
+   txtCelular.setText("");
+   cboxUfEmissor.setSelectedIndex(0);
+   chkDeficiente.setSelected(false);
+   chkRepresentante.setSelected(false);
+   tbMorador.clearSelection();
+}
+
+private void caixaAlta(){
+        
+        txtBairro.setDocument(new CustomDocument());
+        txtCidade.setDocument(new CustomDocument());
+        txtComplemento.setDocument(new CustomDocument());
+        txtEndereco.setDocument(new CustomDocument());
+        txtNome.setDocument(new CustomDocument());
+        txtOE.setDocument(new CustomDocument());
+    }
+
+
 }

@@ -22,10 +22,20 @@ public class Familia {
     private String cidade;
     private String uf;
     private String cep;
+    private String telefone;
     private double rendaFamilia;
     private Date dt_Cadastro;
     private ArrayList<Morador> Morador =  new ArrayList<>();
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    
     public int getNr_Familia() {
         return nr_Familia;
     }

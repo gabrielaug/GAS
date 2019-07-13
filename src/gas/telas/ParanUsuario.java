@@ -762,7 +762,6 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
         
         try {
             if(rnVoluntario.AtualizarAcessos(voluntario)){
-               
                 JOptionPane.showMessageDialog(this,"Gravado !","Sucesso",JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (DAOException | SQLException ex) {
