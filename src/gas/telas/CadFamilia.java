@@ -9,7 +9,10 @@ import com.sun.glass.events.KeyEvent;
 import gas.basicas.Familia;
 import gas.basicas.Morador;
 import gas.basicas.Voluntario;
+import gas.regra.RNFamilia;
 import gas.util.CustomDocument;
+import gas.util.DAOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +25,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
 
     private Voluntario voluntario;
     private Familia familia;
+    private String acaoBotao;
     
     /**
      * Creates new form CadFamilia
@@ -32,10 +36,23 @@ public class CadFamilia extends javax.swing.JInternalFrame {
     
     public CadFamilia(Voluntario x){
         initComponents();
+        acaoBotao = "Cadastrar";
         this.voluntario = x;
         this.familia = new Familia();
         caixaAlta();
         
+        
+    }
+    
+    /**
+     * ATUALIZAR TEXTO DO BOTAO DE AÇÃO PRINCIPAL  - ATUALIZAR OU CADASTRAR FAMILIA
+     */
+    private void btnAcao(){
+        if(this.acaoBotao.equalsIgnoreCase("Cadastrar")){
+            btnCadastrar.setText("Cadastrar");
+        }else if(this.acaoBotao.equalsIgnoreCase("Atualizar")){
+            btnCadastrar.setText("Atualizar Dados");
+        }
     }
 
     /**
@@ -73,6 +90,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        cboxUfEmissor = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -82,17 +100,16 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         txtOE = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        cboxUfEmissor = new javax.swing.JComboBox<>();
         txtDtNascimento = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txtCelular = new javax.swing.JFormattedTextField();
         txtRenda = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        txtObs = new java.awt.TextArea();
         jLabel21 = new javax.swing.JLabel();
         chkRepresentante = new javax.swing.JCheckBox();
         chkDeficiente = new javax.swing.JCheckBox();
+        txtObs = new java.awt.TextArea();
         jLabel23 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnAlterarMorador = new javax.swing.JButton();
@@ -100,7 +117,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         btnLimparMorador = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         btnSair = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMorador = new javax.swing.JTable();
@@ -170,6 +187,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Renda Famíliar:");
 
+        txtRendaFamiliar.setEditable(false);
         txtRendaFamiliar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRendaFamiliarKeyTyped(evt);
@@ -193,6 +211,11 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefoneFocusLost(evt);
+            }
+        });
         txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTelefoneKeyPressed(evt);
@@ -286,12 +309,13 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtRendaFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtRendaFamiliar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -302,6 +326,13 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jLabel10.setText("Morador:");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        cboxUfEmissor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PE", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cboxUfEmissor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cboxUfEmissorKeyPressed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Nome:");
@@ -320,6 +351,11 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCpfFocusLost(evt);
+            }
+        });
         txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCpfKeyPressed(evt);
@@ -358,13 +394,6 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("UF:");
 
-        cboxUfEmissor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PE", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
-        cboxUfEmissor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cboxUfEmissorKeyPressed(evt);
-            }
-        });
-
         try {
             txtDtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -387,6 +416,11 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCelular.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCelularFocusLost(evt);
+            }
+        });
         txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCelularKeyPressed(evt);
@@ -404,8 +438,6 @@ public class CadFamilia extends javax.swing.JInternalFrame {
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setText("Renda:");
-
-        txtObs.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("Observação:");
@@ -425,6 +457,8 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 chkDeficienteKeyPressed(evt);
             }
         });
+
+        txtObs.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -570,10 +604,10 @@ public class CadFamilia extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton6.setText("Cadastrar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -589,7 +623,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(188, 188, 188))
         );
         jPanel5Layout.setVerticalGroup(
@@ -598,7 +632,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -706,15 +740,57 @@ public class CadFamilia extends javax.swing.JInternalFrame {
 
     private void btnLimparMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMoradorActionPerformed
         limparMorador();
+        txtNome.grabFocus();
     }//GEN-LAST:event_btnLimparMoradorActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
        this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        
+        
+        if (this.acaoBotao.equalsIgnoreCase("Cadastrar")) {
+
+            if (this.voluntario.getAcessoUsuario().getCadFami().equalsIgnoreCase("N")) {
+                JOptionPane.showMessageDialog(this, "Usuário sem permissão.", "Permissão", JOptionPane.ERROR_MESSAGE);
+            } else {
+
+                RNFamilia rn = new RNFamilia();
+                try {
+                    
+                    this.familia.setCep(txtCep.getText());
+                    this.familia.setEndereco(txtEndereco.getText());
+                    this.familia.setBairro(txtBairro.getText());
+                    this.familia.setCidade(txtCidade.getText());
+                    this.familia.setUf(cboxUf.getSelectedItem().toString());
+                    this.familia.setNumero(txtNumero.getText());
+                    this.familia.setComplemento(txtComplemento.getText());
+                    this.familia.setTelefone(txtTelefone.getText());
+                    
+                    rn.inserir(familia);
+                    limparFamilia();
+                    JOptionPane.showMessageDialog(this, "Família Adicionada !", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    
+                } catch (DAOException | SQLException ex) {
+
+                }
+
+            }
+
+        } else if (this.acaoBotao.equalsIgnoreCase("Atualizar")) {
+
+            if (this.voluntario.getAcessoUsuario().getAltFami().equalsIgnoreCase("N")) {
+                JOptionPane.showMessageDialog(this, "Usuário sem permissão.", "Permissão", JOptionPane.ERROR_MESSAGE);
+                
+            } else {
+
+            }
+        }
+
+       
+       
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesqActionPerformed
 
@@ -732,58 +808,57 @@ public class CadFamilia extends javax.swing.JInternalFrame {
     private void btnIncluirMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirMoradorActionPerformed
       
    
-   if(this.voluntario.getAcessoUsuario().getCadMora().equalsIgnoreCase("S")){
-   
-       if(txtNome.getText().trim().isEmpty() || txtNome.getText().equalsIgnoreCase("")){
-           JOptionPane.showMessageDialog(this,"Digite um nome para o morador","Error",JOptionPane.ERROR_MESSAGE);
-       }else{
-           
-       
-           Morador morador = new Morador();
+        if (this.voluntario.getAcessoUsuario().getCadMora().equalsIgnoreCase("S")) {
 
-           morador.setNome(txtNome.getText());
-           morador.setCpf(txtCpf.getText());
-           morador.setRg(txtRG.getText());
-           morador.setOrg_Emissor(txtOE.getText());
-           morador.setUfEmissor(cboxUfEmissor.getSelectedItem().toString());
-           morador.setDt_Nascimento(txtDtNascimento.getText());
-           morador.setCelular(txtCelular.getText());
+            if (txtNome.getText().trim().isEmpty() || txtNome.getText().equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(this, "Digite um nome para o morador", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
 
-           if(txtRenda.getText().trim().isEmpty() || txtRenda.getText().equalsIgnoreCase("")){
-               morador.setRenda(0);
-           }else{
-               morador.setRenda(Double.parseDouble(txtRenda.getText()));
-           }
+                Morador morador = new Morador();
+
+                morador.setNome(txtNome.getText());
+                morador.setCpf(txtCpf.getText());
+                morador.setRg(txtRG.getText());
+                morador.setOrg_Emissor(txtOE.getText());
+                morador.setUfEmissor(cboxUfEmissor.getSelectedItem().toString());
+                morador.setDt_Nascimento(txtDtNascimento.getText());
+                morador.setCelular(txtCelular.getText());
+
+                if (txtRenda.getText().trim().isEmpty() || txtRenda.getText().equalsIgnoreCase("")) {
+                    morador.setRenda(0);
+                } else {
+                    morador.setRenda(Double.parseDouble(txtRenda.getText()));
+                }
+
+                if (chkRepresentante.isSelected()) {
+                    morador.setRepresentante("S");
+                    chkRepresentante.setEnabled(false);
+                    chkRepresentante.setSelected(false);
+                } else {
+                    morador.setRepresentante("N");
+                }
+
+                if (chkDeficiente.isSelected()) {
+                    morador.setDeficiente("S");
+                    chkDeficiente.setSelected(false);
+                } else {
+                    morador.setDeficiente("N");
+                }
+
+                morador.setObservacao(txtObs.getText());
+
+                this.familia.getMorador().add(morador);
+                lista();
+                limparMorador();
+                txtNome.grabFocus();
 
 
-           if(chkRepresentante.isSelected()){
-              morador.setRepresentante("S");
-              chkRepresentante.setEnabled(false);
-              chkRepresentante.setSelected(false);
-           }else{
-               morador.setRepresentante("N");
-           }
-
-           if(chkDeficiente.isSelected()){
-              morador.setDeficiente("S");
-              chkDeficiente.setSelected(false);
-           }else{
-               morador.setDeficiente("N");
-           }
-
-           morador.setObservacao(txtObs.getText());
+            }
 
 
-           this.familia.getMorador().add(morador);
-           lista();
-           limparMorador();
-           txtNome.grabFocus();
-   
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuário sem permissão.", "Permissão", JOptionPane.ERROR_MESSAGE);
         }
-   
-   }else{
-       JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);
-   }
    
         
     }//GEN-LAST:event_btnIncluirMoradorActionPerformed
@@ -882,42 +957,40 @@ public class CadFamilia extends javax.swing.JInternalFrame {
        
         int linha;
         boolean rep = false;
-        
+
         linha = tbMorador.getSelectedRow();
-        
+
         txtNome.setText(this.familia.getMorador().get(linha).getNome());
         txtCpf.setText(this.familia.getMorador().get(linha).getCpf());
         txtRG.setText(this.familia.getMorador().get(linha).getRg());
         txtOE.setText(this.familia.getMorador().get(linha).getOrg_Emissor());
         cboxUfEmissor.setSelectedItem(this.familia.getMorador().get(linha).getUfEmissor());
         txtDtNascimento.setText(this.familia.getMorador().get(linha).getDt_Nascimento());
-        
-        for (Morador mo : this.familia.getMorador()){
-            if(mo.getRepresentante().equalsIgnoreCase("S")){
+
+        for (Morador mo : this.familia.getMorador()) {
+            if (mo.getRepresentante().equalsIgnoreCase("S")) {
                 rep = true;
             }
         }
-        
-        
-        
-        if(this.familia.getMorador().get(linha).getRepresentante().equalsIgnoreCase("S")){
-          chkRepresentante.setEnabled(true);
-          chkRepresentante.setSelected(true);  
-        }else if(rep){
+
+        if (this.familia.getMorador().get(linha).getRepresentante().equalsIgnoreCase("S")) {
+            chkRepresentante.setEnabled(true);
+            chkRepresentante.setSelected(true);
+        } else if (rep) {
             chkRepresentante.setEnabled(false);
-            chkRepresentante.setSelected(false); 
+            chkRepresentante.setSelected(false);
         }/*else{
           chkRepresentante.setEnabled(true);
           chkRepresentante.setSelected(true); 
         }*/
-        
-        
-        if(this.familia.getMorador().get(linha).getDeficiente().equalsIgnoreCase("S")){
+
+
+        if (this.familia.getMorador().get(linha).getDeficiente().equalsIgnoreCase("S")) {
             chkDeficiente.setSelected(true);
-        }else{
+        } else {
             chkDeficiente.setSelected(false);
         }
-        
+
         txtObs.setText(this.familia.getMorador().get(linha).getObservacao());
         txtCelular.setText(this.familia.getMorador().get(linha).getCelular());
         txtRenda.setText(String.valueOf(this.familia.getMorador().get(linha).getRenda()));
@@ -927,46 +1000,44 @@ public class CadFamilia extends javax.swing.JInternalFrame {
 
     private void btnAlterarMoradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarMoradorActionPerformed
         
-        if(this.voluntario.getAcessoUsuario().getAltMora().equalsIgnoreCase("S")){
-            
+        if (this.voluntario.getAcessoUsuario().getAltMora().equalsIgnoreCase("S")) {
+
             Morador morador = new Morador();
-            
+
             int linha = tbMorador.getSelectedRow();
-            
-            if(linha < 0){
-                
-            }else{
-                
-            
-            
-            this.familia.getMorador().get(linha).setNome(txtNome.getText());
-            this.familia.getMorador().get(linha).setCpf(txtCpf.getText());
-            this.familia.getMorador().get(linha).setRg(txtRG.getText());
-            this.familia.getMorador().get(linha).setOrg_Emissor(txtOE.getText());
-            this.familia.getMorador().get(linha).setUfEmissor(cboxUfEmissor.getSelectedItem().toString());
-            this.familia.getMorador().get(linha).setDt_Nascimento(txtDtNascimento.getText());
-            this.familia.getMorador().get(linha).setCelular(txtCelular.getText());
-            this.familia.getMorador().get(linha).setRenda(Double.parseDouble(txtRenda.getText()));
-            if(chkRepresentante.isSelected()){
-               this.familia.getMorador().get(linha).setRepresentante("S");
-                chkRepresentante.setEnabled(false);
-                chkRepresentante.setSelected(false); 
-            }else{
-               this.familia.getMorador().get(linha).setRepresentante("N"); 
+
+            if (linha < 0) {
+
+            } else {
+
+                this.familia.getMorador().get(linha).setNome(txtNome.getText());
+                this.familia.getMorador().get(linha).setCpf(txtCpf.getText());
+                this.familia.getMorador().get(linha).setRg(txtRG.getText());
+                this.familia.getMorador().get(linha).setOrg_Emissor(txtOE.getText());
+                this.familia.getMorador().get(linha).setUfEmissor(cboxUfEmissor.getSelectedItem().toString());
+                this.familia.getMorador().get(linha).setDt_Nascimento(txtDtNascimento.getText());
+                this.familia.getMorador().get(linha).setCelular(txtCelular.getText());
+                this.familia.getMorador().get(linha).setRenda(Double.parseDouble(txtRenda.getText()));
+                if (chkRepresentante.isSelected()) {
+                    this.familia.getMorador().get(linha).setRepresentante("S");
+                    chkRepresentante.setEnabled(false);
+                    chkRepresentante.setSelected(false);
+                } else {
+                    this.familia.getMorador().get(linha).setRepresentante("N");
+                }
+
+                if (chkDeficiente.isSelected()) {
+                    this.familia.getMorador().get(linha).setDeficiente("S");
+                } else {
+                    this.familia.getMorador().get(linha).setDeficiente("N");
+                }
+
+                lista();
+                limparMorador();
+
             }
-            
-            if(chkDeficiente.isSelected()){
-               this.familia.getMorador().get(linha).setDeficiente("S"); 
-            }else{
-               this.familia.getMorador().get(linha).setDeficiente("N"); 
-            }
-            
-            lista();
-            limparMorador();
-            
-            }
-        }else{
-          JOptionPane.showMessageDialog(this,"Usuário sem permissão.","Permissão",JOptionPane.ERROR_MESSAGE);  
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuário sem permissão.", "Permissão", JOptionPane.ERROR_MESSAGE);
         }
         
         
@@ -987,6 +1058,24 @@ public class CadFamilia extends javax.swing.JInternalFrame {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_formKeyReleased
+
+    private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
+        if(txtCpf.getText().trim().length() < 14){
+            txtCpf.setText("");
+        }
+    }//GEN-LAST:event_txtCpfFocusLost
+
+    private void txtCelularFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCelularFocusLost
+        if(txtCelular.getText().trim().length() < 14){
+            txtCelular.setText("");
+        }
+    }//GEN-LAST:event_txtCelularFocusLost
+
+    private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
+        if(txtTelefone.getText().trim().length() < 13){
+            txtTelefone.setText("");
+        }
+    }//GEN-LAST:event_txtTelefoneFocusLost
 
     
     private void lista(){
@@ -1015,6 +1104,7 @@ public class CadFamilia extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarMorador;
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnIncluirMorador;
     private javax.swing.JButton btnLimparMorador;
     private javax.swing.JButton btnPesq;
@@ -1023,7 +1113,6 @@ public class CadFamilia extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cboxUfEmissor;
     private javax.swing.JCheckBox chkDeficiente;
     private javax.swing.JCheckBox chkRepresentante;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
@@ -1082,12 +1171,28 @@ private void limparMorador(){
    txtObs.setText("");
    txtRG.setText("");
    txtRenda.setText("");
-   txtTelefone.setText("");
    txtCelular.setText("");
    cboxUfEmissor.setSelectedIndex(0);
    chkDeficiente.setSelected(false);
    chkRepresentante.setSelected(false);
    tbMorador.clearSelection();
+}
+
+
+private void limparFamilia(){
+    txtRegistro.setText("");
+    txtCep.setText("");
+    txtEndereco.setText("");
+    txtBairro.setText("");
+    txtCidade.setText("");
+    txtComplemento.setText("");
+    txtNumero.setText("");
+    txtRendaFamiliar.setText("");
+    txtTelefone.setText("");
+    cboxUf.setSelectedIndex(0);
+    tbMorador.removeAll();
+    limparMorador();
+    
 }
 
 private void caixaAlta(){
