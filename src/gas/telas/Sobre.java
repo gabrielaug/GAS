@@ -58,7 +58,7 @@ public class Sobre extends javax.swing.JDialog {
         jLabel1.setText("Software Desenvolvido pela Empresa:  ");
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        jLabel3.setText("EMPREENDIMENTOS TECNOLOGOCIOS E SERVIÇOS");
+        jLabel3.setText("EMPREENDIMENTOS TECNOLOGICOS E SERVIÇOS");
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
@@ -102,7 +102,7 @@ public class Sobre extends javax.swing.JDialog {
                         .addComponent(lblUsuario)
                         .addGap(6, 6, 6)
                         .addComponent(lblUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -399,6 +399,11 @@ public class CadFamilia extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtDtNascimento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDtNascimentoFocusLost(evt);
+            }
+        });
         txtDtNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDtNascimentoKeyPressed(evt);
@@ -1061,21 +1066,32 @@ public class CadFamilia extends javax.swing.JInternalFrame {
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
         if(txtCpf.getText().trim().length() < 14){
-            txtCpf.setText("");
+            txtCpf.setValue(null);
         }
     }//GEN-LAST:event_txtCpfFocusLost
 
     private void txtCelularFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCelularFocusLost
         if(txtCelular.getText().trim().length() < 14){
-            txtCelular.setText("");
-        }
+
+          txtCelular.setValue(null);
+              
+      }
     }//GEN-LAST:event_txtCelularFocusLost
 
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
         if(txtTelefone.getText().trim().length() < 13){
-            txtTelefone.setText("");
-        }
+
+          txtTelefone.setValue(null);
+              
+      }
     }//GEN-LAST:event_txtTelefoneFocusLost
+
+    private void txtDtNascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDtNascimentoFocusLost
+        if(txtDtNascimento.getText().trim().length() < 10){
+            txtDtNascimento.setValue(null);
+            
+        }
+    }//GEN-LAST:event_txtDtNascimentoFocusLost
 
     
     private void lista(){
