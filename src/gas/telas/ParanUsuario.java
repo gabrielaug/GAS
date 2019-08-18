@@ -22,6 +22,7 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
 
     private RNVoluntario rnVoluntario;
     private Voluntario voluntario;
+
     /**
      * Creates new form ParanUsuario
      */
@@ -30,12 +31,13 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
         voluntario = new Voluntario();
         rnVoluntario = new RNVoluntario();
         txtLogin.setDocument(new CustomDocument());
-        
+
     }
-    
+
     /**
      * CONSTRUTOR USADO PARA ALTERAR PERMISSÕES LOGO APÓS O CADASTRO
-     * @param x 
+     *
+     * @param x
      */
     public ParanUsuario(Voluntario x) {
         initComponents();
@@ -43,7 +45,14 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
         rnVoluntario = new RNVoluntario();
         txtLogin.setDocument(new CustomDocument());
     }
-   
+
+    public ParanUsuario(Voluntario x, Parametros y) {
+        initComponents();
+        voluntario = x;
+        rnVoluntario = new RNVoluntario();
+        txtLogin.setDocument(new CustomDocument());
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -399,67 +408,62 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnHabilitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilitarTodosActionPerformed
-        if(!this.txtNome.getText().trim().isEmpty() || !this.txtNome.getText().equalsIgnoreCase("")){
-        chkAlterConfigSistema.setSelected(true);
-        chkAlterDadosFamilia.setSelected(true);
-        chkAlterDadosMorador.setSelected(true);
-        chkAlterDadosVolun.setSelected(true);
-        chkAlterDoacao.setSelected(true);
-        chkCadDoacao.setSelected(true);
-        chkCadFamilia.setSelected(true);
-        chkCadMorador.setSelected(true);
-        chkCadVolun.setSelected(true);
-        chkExcDoacao.setSelected(true);
-        chkGerarRelatorio.setSelected(true);
-        chkGerenUsuario.setSelected(true);
-        chkCadAux.setSelected(true);
-        chkAlterAux.setSelected(true);
-        chkExcAux.setSelected(true);
+        if (!this.txtNome.getText().trim().isEmpty() || !this.txtNome.getText().equalsIgnoreCase("")) {
+            chkAlterConfigSistema.setSelected(true);
+            chkAlterDadosFamilia.setSelected(true);
+            chkAlterDadosMorador.setSelected(true);
+            chkAlterDadosVolun.setSelected(true);
+            chkAlterDoacao.setSelected(true);
+            chkCadDoacao.setSelected(true);
+            chkCadFamilia.setSelected(true);
+            chkCadMorador.setSelected(true);
+            chkCadVolun.setSelected(true);
+            chkExcDoacao.setSelected(true);
+            chkGerarRelatorio.setSelected(true);
+            chkGerenUsuario.setSelected(true);
+            chkCadAux.setSelected(true);
+            chkAlterAux.setSelected(true);
+            chkExcAux.setSelected(true);
         }
-        
-        
 
     }//GEN-LAST:event_btnHabilitarTodosActionPerformed
 
     private void btnDesabilitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesabilitarTodosActionPerformed
-        
-        if(!this.txtNome.getText().trim().isEmpty() || !this.txtNome.getText().equalsIgnoreCase("")){
-        chkAlterConfigSistema.setSelected(false);
-        chkAlterDadosFamilia.setSelected(false);
-        chkAlterDadosMorador.setSelected(false);
-        chkAlterDadosVolun.setSelected(false);
-        chkAlterDoacao.setSelected(false);
-        chkCadDoacao.setSelected(false);
-        chkCadFamilia.setSelected(false);
-        chkCadMorador.setSelected(false);
-        chkCadVolun.setSelected(false);
-        chkExcDoacao.setSelected(false);
-        chkGerarRelatorio.setSelected(false);
-        chkGerenUsuario.setSelected(false);
-        chkCadAux.setSelected(false);
-        chkAlterAux.setSelected(false);
-        chkExcAux.setSelected(false);
+
+        if (!this.txtNome.getText().trim().isEmpty() || !this.txtNome.getText().equalsIgnoreCase("")) {
+            chkAlterConfigSistema.setSelected(false);
+            chkAlterDadosFamilia.setSelected(false);
+            chkAlterDadosMorador.setSelected(false);
+            chkAlterDadosVolun.setSelected(false);
+            chkAlterDoacao.setSelected(false);
+            chkCadDoacao.setSelected(false);
+            chkCadFamilia.setSelected(false);
+            chkCadMorador.setSelected(false);
+            chkCadVolun.setSelected(false);
+            chkExcDoacao.setSelected(false);
+            chkGerarRelatorio.setSelected(false);
+            chkGerenUsuario.setSelected(false);
+            chkCadAux.setSelected(false);
+            chkAlterAux.setSelected(false);
+            chkExcAux.setSelected(false);
         }
-        
-        
-        
-        
+
     }//GEN-LAST:event_btnDesabilitarTodosActionPerformed
 
     private void btnPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesqActionPerformed
-        
+
         pesquisar();
-        
+
     }//GEN-LAST:event_btnPesqActionPerformed
 
     private void txtLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginKeyPressed
-        
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(!this.txtLogin.getText().equalsIgnoreCase("") || !this.txtLogin.getText().trim().isEmpty()){
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!this.txtLogin.getText().equalsIgnoreCase("") || !this.txtLogin.getText().trim().isEmpty()) {
                 this.voluntario.setLogin(txtLogin.getText());
                 try {
                     voluntario = rnVoluntario.pesquisar(voluntario);
@@ -484,170 +488,163 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
                     chkCadAux.setEnabled(true);
                     chkAlterAux.setEnabled(true);
                     chkExcAux.setEnabled(true);
-                    
+
                     btnGravar.setEnabled(true);
-                    
+
                 } catch (DAOException | SQLException ex) {
                 }
             }
         }
-        
-        if(evt.getKeyCode() == KeyEvent.VK_F1){
-             
+
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+
             pesquisar();
         }
-        
+
     }//GEN-LAST:event_txtLoginKeyPressed
 
-    
-    private void pesquisar(){
-            PesqUsuario pesqUsuario = new PesqUsuario(null,true,this);
-            pesqUsuario.setVisible(true);
-            
-            if(pesqUsuario.retornoPesq().getLogin() != null){
-                this.voluntario = pesqUsuario.retornoPesq();
+    private void pesquisar() {
+        PesqUsuario pesqUsuario = new PesqUsuario(null, true, this);
+        pesqUsuario.setVisible(true);
 
-                txtLogin.setText(this.voluntario.getLogin());
-                txtNome.setText(this.voluntario.getNome());
-                    
-                acessos();
-                
-                    btnHabilitarTodos.setEnabled(true);
-                    btnDesabilitarTodos.setEnabled(true);
-                    chkAlterConfigSistema.setEnabled(true);
-                    chkAlterDadosFamilia.setEnabled(true);
-                    chkAlterDadosMorador.setEnabled(true);
-                    chkAlterDadosVolun.setEnabled(true);
-                    chkAlterDoacao.setEnabled(true);
-                    chkCadDoacao.setEnabled(true);
-                    chkCadFamilia.setEnabled(true);
-                    chkCadMorador.setEnabled(true);
-                    chkCadVolun.setEnabled(true);
-                    chkExcDoacao.setEnabled(true);
-                    chkGerarRelatorio.setEnabled(true);
-                    chkGerenUsuario.setEnabled(true);
-                    chkInativarUsuario.setEnabled(true);
-                    chkResetSenha.setEnabled(true);
-                    chkCadAux.setEnabled(true);
-                    chkAlterAux.setEnabled(true);
-                    chkExcAux.setEnabled(true);
-                    
-                    btnGravar.setEnabled(true);
-                
-            }
+        if (pesqUsuario.retornoPesq().getLogin() != null) {
+            this.voluntario = pesqUsuario.retornoPesq();
+
+            txtLogin.setText(this.voluntario.getLogin());
+            txtNome.setText(this.voluntario.getNome());
+
+            acessos();
+
+            btnHabilitarTodos.setEnabled(true);
+            btnDesabilitarTodos.setEnabled(true);
+            chkAlterConfigSistema.setEnabled(true);
+            chkAlterDadosFamilia.setEnabled(true);
+            chkAlterDadosMorador.setEnabled(true);
+            chkAlterDadosVolun.setEnabled(true);
+            chkAlterDoacao.setEnabled(true);
+            chkCadDoacao.setEnabled(true);
+            chkCadFamilia.setEnabled(true);
+            chkCadMorador.setEnabled(true);
+            chkCadVolun.setEnabled(true);
+            chkExcDoacao.setEnabled(true);
+            chkGerarRelatorio.setEnabled(true);
+            chkGerenUsuario.setEnabled(true);
+            chkInativarUsuario.setEnabled(true);
+            chkResetSenha.setEnabled(true);
+            chkCadAux.setEnabled(true);
+            chkAlterAux.setEnabled(true);
+            chkExcAux.setEnabled(true);
+
+            btnGravar.setEnabled(true);
+
+        }
     }
-    
-    private void acessos(){
-        
-        if(this.voluntario.getAcessoUsuario().getAltParan().equalsIgnoreCase("S")){
+
+    private void acessos() {
+
+        if (this.voluntario.getAcessoUsuario().getAltParan().equalsIgnoreCase("S")) {
             chkAlterConfigSistema.setSelected(true);
-        } 
-        if(this.voluntario.getAcessoUsuario().getAltDoa().equalsIgnoreCase("S")){
-             chkAlterDoacao.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getAltFami().equalsIgnoreCase("S")){
-           chkAlterDadosFamilia.setSelected(true);
+        if (this.voluntario.getAcessoUsuario().getAltDoa().equalsIgnoreCase("S")) {
+            chkAlterDoacao.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getAltMora().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getAltFami().equalsIgnoreCase("S")) {
+            chkAlterDadosFamilia.setSelected(true);
+        }
+        if (this.voluntario.getAcessoUsuario().getAltMora().equalsIgnoreCase("S")) {
             chkAlterDadosMorador.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getAltVolun().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getAltVolun().equalsIgnoreCase("S")) {
             chkAlterDadosVolun.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getCadDoa().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getCadDoa().equalsIgnoreCase("S")) {
             chkCadDoacao.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getCadMora().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getCadMora().equalsIgnoreCase("S")) {
             chkCadMorador.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getCadFami().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getCadFami().equalsIgnoreCase("S")) {
             chkCadFamilia.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getCadVolun().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getCadVolun().equalsIgnoreCase("S")) {
             chkCadVolun.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getExcDoa().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getExcDoa().equalsIgnoreCase("S")) {
             chkExcDoacao.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getGerRel().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getGerRel().equalsIgnoreCase("S")) {
             chkGerarRelatorio.setSelected(true);
         }
-        if(this.voluntario.getAcessoUsuario().getGerenUser().equalsIgnoreCase("S")){
+        if (this.voluntario.getAcessoUsuario().getGerenUser().equalsIgnoreCase("S")) {
             chkGerenUsuario.setSelected(true);
         }
-        
-        if(this.voluntario.getAcessoUsuario().getCadAux().equalsIgnoreCase("S")){
+
+        if (this.voluntario.getAcessoUsuario().getCadAux().equalsIgnoreCase("S")) {
             chkCadAux.setSelected(true);
         }
-        
-        if(this.voluntario.getAcessoUsuario().getAltAux().equalsIgnoreCase("S")){
+
+        if (this.voluntario.getAcessoUsuario().getAltAux().equalsIgnoreCase("S")) {
             chkAlterAux.setSelected(true);
         }
-        
-        if(this.voluntario.getAcessoUsuario().getExcAux().equalsIgnoreCase("S")){
+
+        if (this.voluntario.getAcessoUsuario().getExcAux().equalsIgnoreCase("S")) {
             chkExcAux.setSelected(true);
         }
-        
-        if(this.voluntario.getStatus().equalsIgnoreCase("I")){
+
+        if (this.voluntario.getStatus().equalsIgnoreCase("I")) {
             chkInativarUsuario.setSelected(true);
         }
-           
-    }
-    
-    
-    
-    
-    
-    private void txtLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoginFocusLost
-        
 
-            if(this.txtLogin.getText().equalsIgnoreCase("") || this.txtLogin.getText().trim().isEmpty()){
-                this.voluntario.setLogin("");
-                this.voluntario.setNome("");
-                txtNome.setText("");
-                chkAlterConfigSistema.setSelected(false);
-                chkAlterDadosFamilia.setSelected(false);
-                chkAlterDadosMorador.setSelected(false);
-                chkAlterDadosVolun.setSelected(false);
-                chkAlterDoacao.setSelected(false);
-                chkCadDoacao.setSelected(false);
-                chkCadFamilia.setSelected(false);
-                chkCadMorador.setSelected(false);
-                chkCadVolun.setSelected(false);
-                chkExcDoacao.setSelected(false);
-                chkGerarRelatorio.setSelected(false);
-                chkGerenUsuario.setSelected(false);
-                chkInativarUsuario.setSelected(false);
-                chkResetSenha.setSelected(false);
-                chkCadAux.setSelected(false);
-                chkAlterAux.setSelected(false);
-                chkExcAux.setSelected(false);
-                    
-                btnDesabilitarTodos.setEnabled(false);
-                btnHabilitarTodos.setEnabled(false);
-                chkAlterConfigSistema.setEnabled(false);
-                chkAlterDadosFamilia.setEnabled(false);
-                chkAlterDadosMorador.setEnabled(false);
-                chkAlterDadosVolun.setEnabled(false);
-                chkAlterDoacao.setEnabled(false);
-                chkCadDoacao.setEnabled(false);
-                chkCadFamilia.setEnabled(false);
-                chkCadMorador.setEnabled(false);
-                chkCadVolun.setEnabled(false);
-                chkExcDoacao.setEnabled(false);
-                chkGerarRelatorio.setEnabled(false);
-                chkGerenUsuario.setEnabled(false);
-                chkInativarUsuario.setEnabled(false);
-                chkResetSenha.setEnabled(false);
-                chkCadAux.setEnabled(false);
-                chkAlterAux.setEnabled(false);
-                chkExcAux.setEnabled(false);
-                
-                btnGravar.setEnabled(false);
-                        
-            }
-        
-        
+    }
+
+    private void txtLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoginFocusLost
+
+        if (this.txtLogin.getText().equalsIgnoreCase("") || this.txtLogin.getText().trim().isEmpty()) {
+            this.voluntario.setLogin("");
+            this.voluntario.setNome("");
+            txtNome.setText("");
+            chkAlterConfigSistema.setSelected(false);
+            chkAlterDadosFamilia.setSelected(false);
+            chkAlterDadosMorador.setSelected(false);
+            chkAlterDadosVolun.setSelected(false);
+            chkAlterDoacao.setSelected(false);
+            chkCadDoacao.setSelected(false);
+            chkCadFamilia.setSelected(false);
+            chkCadMorador.setSelected(false);
+            chkCadVolun.setSelected(false);
+            chkExcDoacao.setSelected(false);
+            chkGerarRelatorio.setSelected(false);
+            chkGerenUsuario.setSelected(false);
+            chkInativarUsuario.setSelected(false);
+            chkResetSenha.setSelected(false);
+            chkCadAux.setSelected(false);
+            chkAlterAux.setSelected(false);
+            chkExcAux.setSelected(false);
+
+            btnDesabilitarTodos.setEnabled(false);
+            btnHabilitarTodos.setEnabled(false);
+            chkAlterConfigSistema.setEnabled(false);
+            chkAlterDadosFamilia.setEnabled(false);
+            chkAlterDadosMorador.setEnabled(false);
+            chkAlterDadosVolun.setEnabled(false);
+            chkAlterDoacao.setEnabled(false);
+            chkCadDoacao.setEnabled(false);
+            chkCadFamilia.setEnabled(false);
+            chkCadMorador.setEnabled(false);
+            chkCadVolun.setEnabled(false);
+            chkExcDoacao.setEnabled(false);
+            chkGerarRelatorio.setEnabled(false);
+            chkGerenUsuario.setEnabled(false);
+            chkInativarUsuario.setEnabled(false);
+            chkResetSenha.setEnabled(false);
+            chkCadAux.setEnabled(false);
+            chkAlterAux.setEnabled(false);
+            chkExcAux.setEnabled(false);
+
+            btnGravar.setEnabled(false);
+
+        }
+
     }//GEN-LAST:event_txtLoginFocusLost
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
@@ -656,129 +653,122 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
 
-        if(chkInativarUsuario.isSelected()){
+        if (chkInativarUsuario.isSelected()) {
             this.voluntario.setStatus("I");
-        }else{
+        } else {
             this.voluntario.setStatus("A");
         }
-        
-        if(chkResetSenha.isSelected()){
+
+        if (chkResetSenha.isSelected()) {
             this.voluntario.setStatusSenha(0);
-        }else{
+        } else {
             this.voluntario.setStatusSenha(1);
         }
-        
-        if(chkAlterConfigSistema.isSelected()){
+
+        if (chkAlterConfigSistema.isSelected()) {
             this.voluntario.getAcessoUsuario().setAltParan("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setAltParan("N");
         }
-        
-        if(chkAlterDadosFamilia.isSelected()){
+
+        if (chkAlterDadosFamilia.isSelected()) {
             this.voluntario.getAcessoUsuario().setAltFami("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setAltFami("N");
         }
-        
-        if(chkAlterDadosMorador.isSelected()){
+
+        if (chkAlterDadosMorador.isSelected()) {
             this.voluntario.getAcessoUsuario().setAltMora("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setAltMora("N");
         }
-        
-        if(chkAlterDadosVolun.isSelected()){
+
+        if (chkAlterDadosVolun.isSelected()) {
             this.voluntario.getAcessoUsuario().setAltVolun("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setAltVolun("N");
         }
-        
-        if(chkAlterDoacao.isSelected()){
+
+        if (chkAlterDoacao.isSelected()) {
             this.voluntario.getAcessoUsuario().setAltDoa("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setAltDoa("N");
         }
-        
-        if(chkCadDoacao.isSelected()){
+
+        if (chkCadDoacao.isSelected()) {
             this.voluntario.getAcessoUsuario().setCadDoa("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setCadDoa("N");
         }
-        
-        if(chkCadFamilia.isSelected()){
+
+        if (chkCadFamilia.isSelected()) {
             this.voluntario.getAcessoUsuario().setCadFami("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setCadFami("N");
         }
-        
-        if(chkCadMorador.isSelected()){
+
+        if (chkCadMorador.isSelected()) {
             this.voluntario.getAcessoUsuario().setCadMora("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setCadMora("N");
         }
-        
-        if(chkCadVolun.isSelected()){
+
+        if (chkCadVolun.isSelected()) {
             this.voluntario.getAcessoUsuario().setCadVolun("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setCadVolun("N");
         }
-        
-        if(chkExcDoacao.isSelected()){
+
+        if (chkExcDoacao.isSelected()) {
             this.voluntario.getAcessoUsuario().setExcDoa("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setExcDoa("N");
         }
-        
-        if(chkGerarRelatorio.isSelected()){
+
+        if (chkGerarRelatorio.isSelected()) {
             this.voluntario.getAcessoUsuario().setGerRel("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setGerRel("N");
         }
-        
-        if(chkGerenUsuario.isSelected()){
+
+        if (chkGerenUsuario.isSelected()) {
             this.voluntario.getAcessoUsuario().setGerenUser("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setGerenUser("N");
         }
-        
-        if(chkCadAux.isSelected()){
+
+        if (chkCadAux.isSelected()) {
             this.voluntario.getAcessoUsuario().setCadAux("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setCadAux("N");
         }
-        
-        if(chkAlterAux.isSelected()){
+
+        if (chkAlterAux.isSelected()) {
             this.voluntario.getAcessoUsuario().setAltAux("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setAltAux("N");
         }
-        
-        if(chkExcAux.isSelected()){
+
+        if (chkExcAux.isSelected()) {
             this.voluntario.getAcessoUsuario().setExcAux("S");
-        }else{
+        } else {
             this.voluntario.getAcessoUsuario().setExcAux("N");
         }
-        
-        
+
         try {
-            if(rnVoluntario.AtualizarAcessos(voluntario)){
-                JOptionPane.showMessageDialog(this,"Gravado !","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+            if (rnVoluntario.AtualizarAcessos(voluntario)) {
+                JOptionPane.showMessageDialog(this, "Gravado !", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (DAOException | SQLException ex) {
         }
-        
+
     }//GEN-LAST:event_btnGravarActionPerformed
 
-    
-    
-    
-    
-    
     private void btnPesqKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPesqKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-         btnPesq.doClick();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnPesq.doClick();
         }
     }//GEN-LAST:event_btnPesqKeyPressed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDesabilitarTodos;
