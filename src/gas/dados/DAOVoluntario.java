@@ -10,7 +10,6 @@ import gas.interfaces.InterfaceVoluntario;
 import gas.util.Conexao;
 import gas.util.DAOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,8 +26,11 @@ public class DAOVoluntario implements InterfaceVoluntario{
         
         Connection con = Conexao.getInstance().getConnection();
         
+//          String sql = "INSERT INTO Voluntario (Login,Senha,Nome) VALUES (?,?,?)";
         String sql = "INSERT INTO Voluntario (Login,Senha,Nome,CPF,Profissao,Endereco,Complemento,Numero,Bairro,Cidade,UF,CEP,";
-        sql+="Telefone,Celular,Dt_Nascumento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        sql+="Telefone,Celular,Dt_Nascimento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        System.out.println(voluntario.getLogin()+"/n"+voluntario.getSenha()+"/n" );
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -46,16 +48,17 @@ public class DAOVoluntario implements InterfaceVoluntario{
         pstm.setString(12,voluntario.getCep());
         pstm.setString(13,voluntario.getTelefone());
         pstm.setString(14,voluntario.getCelular());
-        pstm.setDate(15, (Date) voluntario.getDt_Nascimento());
+        pstm.setString(15,voluntario.getDt_Nascimento());
         
-            
+        System.out.println(pstm);
+        
         try{
          
         pstm.executeUpdate();
             
         }
         catch(SQLException ex){
-            
+            System.out.println(ex);
         }
         finally{
            Conexao.closeConnection(con, pstm); 
@@ -87,7 +90,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
         pstm.setString(11,voluntario.getCep());
         pstm.setString(12,voluntario.getTelefone());
         pstm.setString(13,voluntario.getCelular());
-        pstm.setDate(14, (Date) voluntario.getDt_Nascimento());
+        pstm.setString(14,voluntario.getDt_Nascimento());
         pstm.setString(15,voluntario.getLogin());
             
         try{
@@ -170,7 +173,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
             voluntario.setCep(rs.getString("CEP"));
             voluntario.setTelefone(rs.getString("Telefone"));
             voluntario.setCelular(rs.getString("Celular"));
-            voluntario.setDt_Nascimento(rs.getDate("Dt_Nascumento"));
+            voluntario.setDt_Nascimento(rs.getString("Dt_Nascumento"));
             voluntario.setStatus(rs.getString("Status"));
             voluntario.setDt_Cadastro(rs.getString("Dt_Cadastro"));
             voluntario.setStatusSenha(rs.getInt("StatusSenha"));
@@ -241,7 +244,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
             retorno.setCep(rs.getString("CEP"));
             retorno.setTelefone(rs.getString("Telefone"));
             retorno.setCelular(rs.getString("Celular"));
-            retorno.setDt_Nascimento(rs.getDate("Dt_Nascumento"));
+            retorno.setDt_Nascimento(rs.getString("Dt_Nascumento"));
             retorno.setStatus(rs.getString("Status"));
             retorno.setDt_Cadastro(rs.getString("Dt_Cadastro"));
             retorno.setStatusSenha(rs.getInt("StatusSenha"));

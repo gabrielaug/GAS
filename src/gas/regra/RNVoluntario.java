@@ -32,7 +32,11 @@ public class RNVoluntario implements InterfaceVoluntario{
 
     @Override
     public void inserir(Voluntario voluntario) throws DAOException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        System.out.println(voluntario.getLogin());
+        dao.inserir(voluntario);
+        
+        
     }
 
     @Override

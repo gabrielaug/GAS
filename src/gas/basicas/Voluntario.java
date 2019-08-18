@@ -5,8 +5,6 @@
  */
 package gas.basicas;
 
-import java.util.Date;
-
 /**
  *
  * @author Gabriel Augusto
@@ -27,7 +25,7 @@ public class Voluntario{
     private String cep;
     private String telefone;
     private String celular;
-    private Date dt_Nascimento;
+    private String dt_Nascimento;
     private String status;
     private String dt_Cadastro;
     private AcessoUsuario acessoUsuario = new AcessoUsuario();
@@ -161,11 +159,11 @@ public class Voluntario{
         this.celular = celular;
     }
 
-    public Date getDt_Nascimento() {
+    public String getDt_Nascimento() {
         return dt_Nascimento;
     }
 
-    public void setDt_Nascimento(Date dt_Nascimento) {
+    public void setDt_Nascimento(String dt_Nascimento) {
         this.dt_Nascimento = dt_Nascimento;
     }
 

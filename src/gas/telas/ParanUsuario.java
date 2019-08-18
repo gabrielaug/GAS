@@ -36,9 +36,8 @@ public class ParanUsuario extends javax.swing.JInternalFrame {
     /**
      * CONSTRUTOR USADO PARA ALTERAR PERMISSÕES LOGO APÓS O CADASTRO
      * @param x 
-     * @param y 
      */
-    public ParanUsuario(Voluntario x,Parametros y) {
+    public ParanUsuario(Voluntario x) {
         initComponents();
         voluntario = x;
         rnVoluntario = new RNVoluntario();
