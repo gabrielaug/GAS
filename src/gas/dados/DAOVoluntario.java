@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class DAOVoluntario implements InterfaceVoluntario{
 
     @Override
-    public void inserir(Voluntario voluntario) throws DAOException, SQLException {
+    public boolean inserir(Voluntario voluntario) throws DAOException, SQLException {
         
         Connection con = Conexao.getInstance().getConnection();
         
@@ -55,10 +55,12 @@ public class DAOVoluntario implements InterfaceVoluntario{
         try{
          
         pstm.executeUpdate();
+        return true;
             
         }
         catch(SQLException ex){
             System.out.println(ex);
+            return false;
         }
         finally{
            Conexao.closeConnection(con, pstm); 
@@ -73,7 +75,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
         Connection con = Conexao.getInstance().getConnection();
         
         String sql = "UPDATE Voluntario SET Senha = ?,Nome = ?,CPF = ?,Profissao = ?,Endereco = ?,Complemento = ?,Numero =?,Bairro = ?,Cidade = ?,UF = ?,CEP = ?,";
-        sql+="Telefone = ?,Celular =?,Dt_Nascumento = ? WHERE Login = ? )";
+        sql+="Telefone = ?,Celular =?,Dt_Nascimento = ? WHERE Login = ? )";
         
         PreparedStatement pstm;
         pstm = con.prepareStatement(sql);
@@ -145,7 +147,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
         Connection con = Conexao.getInstance().getConnection();
         
         String sql = "SELECT v.Login,v.Senha,v.Nome,v.CPF,v.Profissao,v.Endereco,v.Complemento,v.Numero,v.Bairro,v.Cidade,v.UF,v.CEP,"
-                +"v.Telefone,v.Celular,v.Dt_Nascumento,v.`Status`,v.Dt_Cadastro,v.StatusSenha,a.CadVolun,a.AltVolun,a.CadFami,a.AltFami,"
+                +"v.Telefone,v.Celular,v.Dt_Nascimento,v.`Status`,v.Dt_Cadastro,v.StatusSenha,a.CadVolun,a.AltVolun,a.CadFami,a.AltFami,"
                 +"a.CadMora,a.AltMora,a.GerRel,a.AltParan,a.GerenUser,a.CadDoa,a.AltDoa,a.ExcDoa,a.CadAux,a.AltAux,a.ExcAux FROM Voluntario as v\n"
                 +"INNER JOIN Acessos AS a ON a.login = v.login";
         
@@ -173,7 +175,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
             voluntario.setCep(rs.getString("CEP"));
             voluntario.setTelefone(rs.getString("Telefone"));
             voluntario.setCelular(rs.getString("Celular"));
-            voluntario.setDt_Nascimento(rs.getString("Dt_Nascumento"));
+            voluntario.setDt_Nascimento(rs.getString("Dt_Nascimento"));
             voluntario.setStatus(rs.getString("Status"));
             voluntario.setDt_Cadastro(rs.getString("Dt_Cadastro"));
             voluntario.setStatusSenha(rs.getInt("StatusSenha"));
@@ -217,7 +219,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
         Connection con = Conexao.getInstance().getConnection();
         
         String sql = "SELECT v.Login,v.Senha,v.Nome,v.CPF,v.Profissao,v.Endereco,v.Complemento,v.Numero,v.Bairro,v.Cidade,v.UF,v.CEP,"
-                +"v.Telefone,v.Celular,v.Dt_Nascumento,v.`Status`,v.Dt_Cadastro,v.StatusSenha,a.CadVolun,a.AltVolun,a.CadFami,a.AltFami,"
+                +"v.Telefone,v.Celular,v.Dt_Nascimento,v.`Status`,v.Dt_Cadastro,v.StatusSenha,a.CadVolun,a.AltVolun,a.CadFami,a.AltFami,"
                 +"a.CadMora,a.AltMora,a.GerRel,a.AltParan,a.GerenUser,a.CadDoa,a.AltDoa,a.ExcDoa,a.CadAux,a.AltAux,a.ExcAux FROM Voluntario as v\n"
                 +"INNER JOIN Acessos AS a ON a.login = v.login WHERE v.Login = ?";
         
@@ -244,7 +246,7 @@ public class DAOVoluntario implements InterfaceVoluntario{
             retorno.setCep(rs.getString("CEP"));
             retorno.setTelefone(rs.getString("Telefone"));
             retorno.setCelular(rs.getString("Celular"));
-            retorno.setDt_Nascimento(rs.getString("Dt_Nascumento"));
+            retorno.setDt_Nascimento(rs.getString("Dt_Nascimento"));
             retorno.setStatus(rs.getString("Status"));
             retorno.setDt_Cadastro(rs.getString("Dt_Cadastro"));
             retorno.setStatusSenha(rs.getInt("StatusSenha"));
@@ -395,4 +397,34 @@ public class DAOVoluntario implements InterfaceVoluntario{
         
          
 }
+    
+    public void inserirAcessoLogin(Voluntario voluntario) throws DAOException, SQLException {
+        
+        Connection con = Conexao.getInstance().getConnection();
+        
+        String sql = "INSERT INTO Acessos (Login) VALUES (?)";
+        
+        PreparedStatement pstm;
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1,voluntario.getLogin());
+        
+        try{
+         
+        pstm.executeUpdate();
+            
+        }
+        catch(SQLException ex){
+            
+        }
+        finally{
+           Conexao.closeConnection(con, pstm); 
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 }
