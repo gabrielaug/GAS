@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public interface InterfaceVoluntario {
     
     
-    public void inserir(Voluntario voluntario) throws DAOException, SQLException;
+    public boolean inserir(Voluntario voluntario) throws DAOException, SQLException;
     public void Alterar (Voluntario voluntario) throws DAOException, SQLException;
     public void excluir(Voluntario voluntario) throws DAOException, SQLException;
     public ArrayList<Voluntario> listarVoluntario () throws DAOException, SQLException;
